@@ -17,6 +17,8 @@ body {
     min-height: 100vh;
     position: relative;
     overflow-x: hidden;
+    overflow-y: auto;
+    scroll-behavior: auto;
 }
 
 body::before {
@@ -62,6 +64,7 @@ h1 {
         0 0 15px rgba(255, 140, 0, 0.5);
     animation: titlePulse 3s ease-in-out infinite;
     position: relative;
+    scroll-margin-top: 20px;
 }
 
 @keyframes titlePulse {
@@ -71,8 +74,8 @@ h1 {
 
 h2 {
     font-family: 'MedievalSharp', cursive;
-    background: linear-gradient(135deg, #fff8dc, #f5f5dc);
-    color: #8b4513;
+    background: linear-gradient(135deg, #3c2f2f, #4a3c31);
+    color: #f4e4bc;
     padding: 10px 15px;
     margin: 10px 0;
     border: 2px solid #d2691e;
@@ -80,10 +83,12 @@ h2 {
     font-size: 1.4em;
     letter-spacing: 1.5px;
     cursor: pointer;
-    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     position: relative;
     overflow: hidden;
     box-shadow: 0 3px 12px rgba(139, 69, 19, 0.3);
+    scroll-margin-top: 40px;
+    will-change: transform;
 }
 
 h2::before {
@@ -93,37 +98,52 @@ h2::before {
     left: -100%;
     width: 100%;
     height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
-    transition: left 0.5s;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.3s;
 }
 
 h2:hover {
     transform: translateY(-3px) scale(1.01);
     box-shadow: 0 6px 20px rgba(139, 69, 19, 0.5);
-    background: linear-gradient(135deg, #f5f5dc, #fff8dc);
+    background: linear-gradient(135deg, #4a3c31, #3c2f2f);
 }
 
 h2:hover::before {
     left: 100%;
 }
 
+h2.open {
+    background: linear-gradient(135deg, #4a3c31, #3c2f2f);
+    box-shadow: 0 6px 20px rgba(139, 69, 19, 0.5);
+    transform: translateY(-2px);
+}
+
 ul {
     list-style-type: none;
     padding: 0;
-    margin: 5px 0;
+    margin: 0;
+    transition: height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    overflow: hidden;
+    will-change: height;
+    height: 0;
+}
+
+ul.visible {
+    height: auto;
 }
 
 ul li {
-    background: linear-gradient(145deg, #fef9e7, #f0e6a0);
+    background: linear-gradient(145deg, #3c2f2f, #4a3c31);
     margin: 8px 0;
     padding: 15px;
     border: 1.5px solid #d2691e;
     border-radius: 8px;
     box-shadow: 
         0 4px 12px rgba(139, 69, 19, 0.2),
-        inset 0 1px 2px rgba(255, 255, 255, 0.5);
-    transition: all 0.3s ease;
+        inset 0 1px 2px rgba(255, 255, 255, 0.1);
+    transition: all 0.2s ease;
     position: relative;
+    color: #f4e4bc;
 }
 
 ul li:hover {
@@ -133,7 +153,7 @@ ul li:hover {
 }
 
 .command {
-    color: #a0522d;
+    color: #ffd700;
     font-weight: bold;
     font-family: 'Roboto', sans-serif;
     font-size: 1.1em;
@@ -142,11 +162,16 @@ ul li:hover {
 }
 
 .access {
-    color: #8b4513;
+    color: #deb887;
     font-size: 0.85em;
     font-style: italic;
     display: block;
     margin-bottom: 4px;
+}
+
+ul li br + * {
+    color: #f4e4bc;
+    font-size: 0.95em;
 }
 
 button {
@@ -160,7 +185,7 @@ button {
     font-size: 0.85em;
     font-weight: bold;
     font-family: 'Roboto', sans-serif;
-    transition: all 0.3s ease;
+    transition: all 0.2s ease;
     box-shadow: 0 2px 8px rgba(139, 69, 19, 0.3);
     position: relative;
     overflow: hidden;
@@ -182,23 +207,24 @@ button:active {
 }
 
 .bot-links {
-    margin-top: 20px;
+    margin-top: 30px;
     padding: 15px;
     text-align: center;
-    background: linear-gradient(145deg, #f5f5dc, #fff8dc);
+    background: linear-gradient(145deg, #3c2f2f, #4a3c31);
     border-radius: 10px;
     border: 1.5px solid #d2691e;
-    font-size: 0.85em;
+    font-size: 0.9em;
     display: flex;
     justify-content: space-around;
     align-items: center;
     box-shadow: 0 4px 12px rgba(139, 69, 19, 0.3);
+    color: #f4e4bc;
 }
 
 .bot-links a {
-    color: #8b4513;
+    color: #f4e4bc;
     text-decoration: none;
-    padding: 8px 15px;
+    padding: 10px 18px;
     border: 1.5px solid #d2691e;
     border-radius: 8px;
     transition: all 0.3s ease;
@@ -209,8 +235,8 @@ button:active {
 .bot-links a:hover {
     background: linear-gradient(145deg, #d2691e, #ff8c00);
     color: #fff;
-    transform: scale(1.03);
-    box-shadow: 0 4px 12px rgba(210, 105, 30, 0.5);
+    transform: scale(1.05);
+    box-shadow: 0 5px 15px rgba(210, 105, 30, 0.6);
 }
 
 .notification {
@@ -234,21 +260,38 @@ button:active {
     to { transform: translateX(-50%) translateY(0); opacity: 1; }
 }
 
-h2 + ul {
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.5s ease-in-out;
-}
-
-h2.open + ul {
-    max-height: 2000px; /* Достаточно для всех элементов */
+/* Зафиксировать тёмную тему независимо от системных настроек */
+@media (prefers-color-scheme: light) {
+    body {
+        background: linear-gradient(135deg, #2c1810 0%, #8b4513 25%, #d2691e 50%, #a0522d 75%, #5d4037 100%) !important;
+        color: #f4e4bc !important;
+    }
+    ul li {
+        background: linear-gradient(145deg, #3c2f2f, #4a3c31) !important;
+        color: #f4e4bc !important;
+    }
+    h2 {
+        background: linear-gradient(135deg, #3c2f2f, #4a3c31) !important;
+        color: #f4e4bc !important;
+    }
+    .bot-links {
+        background: linear-gradient(145deg, #3c2f2f, #4a3c31) !important;
+        color: #f4e4bc !important;
+    }
+    .bot-links a {
+        color: #f4e4bc !important;
+    }
+    ul li br + * {
+        color: #f4e4bc !important;
+    }
 }
 
 @media (max-width: 768px) {
     h1 { font-size: 1.6em; padding: 8px 12px; }
     h2 { font-size: 1.2em; padding: 8px 12px; }
     ul li { padding: 12px; margin: 6px 0; }
-    .bot-links { flex-direction: column; gap: 8px; }
+    .bot-links { flex-direction: column; gap: 10px; }
+    .bot-links a { padding: 12px 16px; font-size: 0.95em; }
 }
 </style>
 
@@ -303,14 +346,36 @@ function createNotification() {
 
 <script>
 document.addEventListener('DOMContentLoaded', () => {
+    // Убрана логика автоматического открытия первого раздела
+    // Все разделы остаются свернутыми при загрузке
+
     const sections = document.querySelectorAll('h2');
+    
     sections.forEach(section => {
         const list = section.nextElementSibling;
         if (list && list.tagName === 'UL') {
             section.addEventListener('click', (e) => {
+                e.preventDefault();
                 e.stopPropagation();
-                section.classList.toggle('open');
-                list.style.maxHeight = section.classList.contains('open') ? '2000px' : '0';
+                const isOpen = section.classList.contains('open');
+                
+                // Закрываем все разделы
+                sections.forEach(s => {
+                    s.classList.remove('open');
+                    const l = s.nextElementSibling;
+                    if (l && l.tagName === 'UL') {
+                        l.classList.remove('visible');
+                    }
+                });
+                
+                // Открываем текущий раздел, если он был закрыт
+                if (!isOpen) {
+                    section.classList.add('open');
+                    list.classList.add('visible');
+                    setTimeout(() => {
+                        section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }, 200);
+                }
             });
         }
     });
@@ -391,10 +456,10 @@ document.addEventListener('DOMContentLoaded', () => {
 <h2>🌾 Команды поставки ресурсов:</h2>
 <ul>
 <li><span class="command">🌾!adminrss F S W O G ник</span><button onclick="copyToClipboard(this.previousElementSibling)">Копировать</button><br><span class="access">Доступно для: R4</span><br>Отправляет все типы ресурсов игроку от имени администратора. Пример: !adminrss 5m 5m 7m 0 8m mictik.</li>
-<li><span class="command">🌾!admin тип ник количество</span><button onclick="copyToClipboard(this.previousElementSibling)">Копировать</button><br><span class="access">Доступно для: R4</span><br>Отправляет ресурсы игроку от имени администратора. Пример: !adminfood mictik 10.</li>
+<li><span class="command">🌾!admin тип ник количество</span><button onclick="copyToClipboard(this.previousElementSibling)">Копировать</button><br><span class="access">Доступно для: R4</span><br>Отправляет ресурсы игроку от имени администратора. Пример: !admin food mictik 10.</li>
 <li><span class="command">🌾!Тип количество</span><button onclick="copyToClipboard(this.previousElementSibling)">Копировать</button><br><span class="access">Доступно для: R1</span><br>Отправляет вам определённый тип ресурсов с вашего баланса. Пример: !food 5m.</li>
 <li><span class="command">🌾!rss F S W O G</span><button onclick="copyToClipboard(this.previousElementSibling)">Копировать</button><br><span class="access">Доступно для: R1</span><br>Отправляет вам все типы ресурсов с вашего баланса. Пример: !rss 10m 0 10m 10m 10m.</li>
-<li><span class="command">🌾!donate тип ник количество</span><button onclick="copyToClipboard(this.previousElementSibling)">Копировать</button><br><span class="access">Доступно для: R1</span><br>Отправляет ресурсы с твоего баланса определённому игроку. Пример: !donatefood mictik 5m.</li>
+<li><span class="command">🌾!donate тип ник количество</span><button onclick="copyToClipboard(this.previousElementSibling)">Копировать</button><br><span class="access">Доступно для: R1</span><br>Отправляет ресурсы с твоего баланса определённому игроку. Пример: !donate food mictik 5m.</li>
 </ul>
 
 <h2>🔎 Команды Поиска:</h2>
