@@ -3,358 +3,288 @@
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Команды Банка Гильдии </title>
+<title>Команды Банка</title>
 
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=MedievalSharp:wght@400;700&family=Roboto:wght@300;400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cinzel&family=MedievalSharp&family=Roboto:wght@400&display=swap');
 
 * { box-sizing: border-box; margin:0; padding:0; }
 
 body {
     font-family: 'Roboto', sans-serif;
-    line-height: 1.7;
+    line-height: 1.5;
     background: #0f0a07;
-    background: linear-gradient(135deg, #1a0f0a 0%, #2c1810 40%, #3d2415 100%);
+    background: linear-gradient(135deg, #1a0f0a, #2c1810);
     color: #f4e4bc;
     min-height: 100vh;
-    padding: 20px;
-    position: relative;
-    overflow-x: hidden;
-}
-
-body::before {
-    content: '';
-    position: fixed;
-    top: 0; left: 0; right: 0; bottom: 0;
-    background: radial-gradient(circle at 20% 80%, rgba(255, 215, 0, 0.08), transparent 50%),
-                radial-gradient(circle at 80% 20%, rgba(184, 134, 11, 0.06), transparent 50%);
-    pointer-events: none;
-    z-index: -1;
+    padding: 12px;
+    font-size: 0.95em;
 }
 
 h1 {
     font-family: 'Cinzel', serif;
-    font-size: 1.6em;
+    font-size: 1.3em;
     text-align: center;
-    margin: 15px auto;
-    padding: 14px 20px;
+    margin: 8px auto;
+    padding: 4px 10px;
     max-width: 90%;
-    background: linear-gradient(90deg, #8b4513, #b8860b, #d2691e, #ff8c00);
+    background: linear-gradient(90deg, #8b4513, #b8860b, #ff8c00);
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
-    border: 2px solid transparent;
-    border-image: linear-gradient(45deg, #d2691e, #b8860b) 1;
-    border-radius: 16px;
-    box-shadow: 0 6px 20px rgba(139, 69, 19, 0.5);
-    text-shadow: 0 0 15px rgba(255, 140, 0, 0.4);
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    text-shadow: 0 0 6px rgba(255,140,0,0.3);
+    line-height: 1.2;
 }
 
 h2 {
     font-family: 'MedievalSharp', cursive;
-    font-size: 1.1em;
+    font-size: 1.2em;
     color: #f4e4bc;
-    background: linear-gradient(135deg, #3c2f2f, #4a3c31);
-    padding: 12px 18px;
-    margin: 12px 0;
-    border-radius: 12px;
-    border: 2px solid #b8860b;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    background: #3c2f2f;
+    padding: 8px 12px;
+    margin: 8px 0;
+    border-radius: 8px;
+    border: 1.5px solid #b8860b;
     cursor: pointer;
-    transition: all 0.25s ease;
-    letter-spacing: 0.6px;
-    position: relative;
-    overflow: hidden;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    transition: 0.2s;
+    letter-spacing: 0.8px;
 }
 
-h2:hover {
-    background: linear-gradient(135deg, #4a3c31, #5d4a3a);
-    transform: translateY(-2px);
-    box-shadow: 0 6px 18px rgba(184, 134, 11, 0.4);
-    border-color: #ff8c00;
-}
-
-h2.open {
-    background: linear-gradient(135deg, #5d4a3a, #4a3c31);
-    box-shadow: 0 6px 18px rgba(139, 69, 19, 0.5);
-}
+h2:hover { background: #4a3c31; transform: translateY(-1px); }
+h2.open { background: #5d4a3a; }
 
 ul {
     list-style: none;
-    padding: 0;
-    margin: 0;
     max-height: 0;
     overflow: hidden;
-    transition: max-height 0.4s ease, padding 0.3s ease;
+    transition: max-height 0.35s ease;
+    padding: 0;
+    margin: 0;
 }
 
-ul.visible {
-    max-height: 5000px;
-    padding: 12px 0;
-}
+ul.visible { max-height: 5000px; padding: 8px 0; }
 
 ul li {
-    background: linear-gradient(145deg, #2b1f1a, #3c2f2f);
-    margin: 10px 0;
-    padding: 16px;
-    border-radius: 10px;
-    border: 1.5px solid #8b4513;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.25);
-    transition: all 0.25s ease;
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
+    background: #2b1f1a;
+    margin: 6px 0;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #8b4513;
+    font-size: 0.92em;
+    line-height: 1.6;
 }
 
-ul li:hover {
-    transform: translateX(4px);
-    border-color: #ff8c00;
-    box-shadow: 0 6px 18px rgba(210, 105, 30, 0.35);
+.command-line, .desc-line {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-wrap: wrap;
 }
 
 .command {
     color: #ffd700;
     font-weight: 600;
-    font-size: 1.15em;
-    display: block;
+    font-size: 1.05em;
 }
 
 .short-desc {
     color: #e8d5a0;
-    font-size: 0.95em;
+    font-size: 0.88em;
     font-style: italic;
 }
 
-.actions {
-    display: flex;
-    gap: 8px;
-    flex-wrap: wrap;
-}
-
-button {
-    padding: 6px 12px;
-    background: linear-gradient(145deg, #8b4513, #a0522d);
+.copy-btn, .info-btn {
+    padding: 3px 7px;
     border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    color: #fff;
-    font-size: 0.85em;
-    font-weight: 600;
-    display: inline-flex;
-    align-items: center;
-    gap: 5px;
-    transition: all 0.2s ease;
-    box-shadow: 0 2px 8px rgba(139, 69, 19, 0.3);
-}
-
-button:hover {
-    background: linear-gradient(145deg, #d2691e, #ff8c00);
-    transform: translateY(-1px);
-    box-shadow: 0 4px 12px rgba(255, 140, 0, 0.4);
-}
-
-button.info-btn {
-    background: linear-gradient(145deg, #2f4f2f, #3d5a3d);
-    font-size: 0.8em;
-    padding: 4px 8px;
-}
-
-button.info-btn:hover {
-    background: linear-gradient(145deg, #4a7b4a, #5a9a5a);
-}
-
-button.copy-example {
-    background: none;
-    padding: 2px 6px;
-    margin-left: 8px;
-    box-shadow: none;
-    border: 1px solid #d2691e;
     border-radius: 6px;
+    color: #fff;
+    font-size: 0.72em;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.2s;
+    white-space: nowrap;
 }
 
-button.copy-example:hover {
-    background: rgba(255, 140, 0, 0.2);
-    transform: none;
+.copy-btn {
+    background: #8b4513;
 }
 
-button svg {
-    width: 13px;
-    height: 13px;
-    fill: currentColor;
+.copy-btn:hover {
+    background: #d2691e;
+    transform: translateY(-1px);
+}
+
+.info-btn {
+    background: #2f4f2f;
+}
+
+.info-btn:hover {
+    background: #4a7b4a;
 }
 
 .bot-links {
-    margin: 40px auto 20px;
-    padding: 18px;
+    margin: 20px auto;
+    padding: 12px;
     text-align: center;
-    background: linear-gradient(145deg, #2b1f1a, #3c2f2f);
-    border-radius: 14px;
-    border: 2px solid #b8860b;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    background: #2b1f1a;
+    border-radius: 10px;
+    border: 1.5px solid #b8860b;
     display: flex;
-    justify-content: center;
-    gap: 18px;
-    flex-wrap: wrap;
+    flex-direction: column;
+    gap: 10px;
     max-width: 90%;
 }
 
 .bot-links a {
     color: #f4e4bc;
     text-decoration: none;
-    padding: 11px 18px;
-    border: 1.5px solid #d2691e;
-    border-radius: 10px;
+    padding: 8px 14px;
+    border: 1px solid #d2691e;
+    border-radius: 8px;
+    font-size: 0.88em;
     font-weight: 600;
-    transition: all 0.3s ease;
-    min-width: 170px;
+    transition: 0.25s;
 }
 
 .bot-links a:hover {
-    background: linear-gradient(145deg, #d2691e, #ff8c00);
+    background: #ff8c00;
     color: #fff;
-    transform: scale(1.05);
-    box-shadow: 0 6px 18px rgba(255, 140, 0, 0.5);
-}
-
-.notification, .modal-overlay {
-    position: fixed;
-    z-index: 1000;
-    display: none;
+    transform: scale(1.03);
 }
 
 .notification {
-    top: 20px;
+    position: fixed;
+    top: 12px;
     left: 50%;
     transform: translateX(-50%);
-    background: linear-gradient(145deg, #8b4513, #a0522d);
+    background: #8b4513;
     color: #fff;
-    padding: 12px 22px;
-    border-radius: 10px;
-    box-shadow: 0 5px 16px rgba(139, 69, 19, 0.5);
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-size: 0.8em;
     font-weight: bold;
-    font-size: 0.94em;
     border: 1px solid #d2691e;
-    max-width: 90%;
+    max-width: 85%;
+    z-index: 1000;
+    display: none;
+    box-shadow: 0 3px 10px rgba(139,69,19,0.4);
 }
 
 .modal-overlay {
+    position: fixed;
     top: 0; left: 0; right: 0; bottom: 0;
-    background: rgba(0,0,0,0.7);
+    background: rgba(0,0,0,0.75);
+    display: none;
     justify-content: center;
     align-items: center;
+    z-index: 1000;
 }
 
 .modal {
-    width: 90%;
-    max-width: 500px;
-    padding: 15px;
-    background: linear-gradient(145deg, #2b1f1a, #3c2f2f);
-    border: 2px solid #b8860b;
-    border-radius: 16px;
+    width: 88%;
+    max-width: 420px;
+    padding: 16px;
+    background: #2b1f1a;
+    border: 1.5px solid #b8860b;
+    border-radius: 12px;
     position: relative;
-    animation: modalIn 0.3s ease;
-    max-height: 80vh;
+    font-size: 0.92em;
+    animation: modalIn 0.25s ease;
+    max-height: 85vh;
     overflow-y: auto;
 }
 
 @keyframes modalIn {
-    from { transform: translateY(-50px); opacity: 0; }
-    to { transform: translateY(0); opacity: 1; }
+    from { transform: scale(0.9); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
 }
 
 .modal h3 {
-    margin: 0 0 12px;
+    margin: 0 0 10px;
     color: #ffd700;
-    font-weight: 600;
-    font-size: 1.0em;
-    font-family: 'Roboto', sans-serif;
+    font-size: 1.12em;
 }
 
 .modal .access {
     color: #90ee90;
     font-weight: bold;
-    font-size: 0.8em;
+    font-size: 0.92em;
     margin: 8px 0;
 }
 
-.modal .description {
+.modal .description, .modal .examples {
     margin: 10px 0;
-    font-size: 0.85em;
+    font-size: 0.98em;
     color: #e8d5a0;
-    line-height: 1.5;
-}
-
-.modal .examples {
-    margin: 12px 0 0;
-    font-size: 0.8em;
-    color: #e8d5a0;
-    line-height: 1.8;
+    line-height: 1.65;
 }
 
 .modal .examples code {
     background: #3c2f2f;
-    padding: 2px 6px;
-    border-radius: 4px;
+    padding: 2px 7px;
+    border-radius: 5px;
     font-family: monospace;
     color: #ffd700;
-    font-weight: 600;
-    font-size: 0.9em;
+    font-size: 1.02em;
+    display: inline-block;
+    margin-right: 10px;
+}
+
+.modal .examples .copy-example {
+    background: #8b4513;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 3px 8px;
+    font-size: 0.75em;
+    cursor: pointer;
+    margin-left: 8px;
+    vertical-align: middle;
+    transition: 0.2s;
+}
+
+.modal .examples .copy-example:hover {
+    background: #d2691e;
 }
 
 .modal .close {
     position: absolute;
-    top: 10px;
-    right: 14px;
+    top: 6px;
+    right: 10px;
     background: none;
     border: none;
-    font-size: 1.6em;
+    font-size: 1.4em;
     color: #ff8c00;
     cursor: pointer;
-    width: 36px;
-    height: 36px;
+    width: 28px;
+    height: 28px;
     display: flex;
     align-items: center;
     justify-content: center;
     border-radius: 50%;
-    transition: background 0.2s;
 }
 
-.modal .close:hover {
-    background: rgba(255,140,0,0.2);
-}
+.modal .close:hover { background: rgba(255,140,0,0.2); }
 
 @media (max-width: 768px) {
-    h1 { font-size: 1.3em; }
-    h2 { font-size: 1.0em; }
-    ul li { padding: 14px; }
-    .modal { width: 95%; padding: 12px; }
-    .modal h3 { font-size: 0.9em; }
-    .modal .description { font-size: 0.8em; }
-    .modal .examples { font-size: 0.75em; }
-    .modal .access { font-size: 0.75em; }
-    .bot-links { flex-direction: column; gap: 12px; }
-    .bot-links a { font-size: 0.9em; padding: 10px 16px; }
+    body { padding: 10px; font-size: 0.9em; }
+    h1 { font-size: 1.2em; padding: 3px 8px; }
+    h2 { font-size: 1.15em; padding: 7px 10px; }
+    ul li { padding: 9px; }
+    .copy-btn, .info-btn { font-size: 0.7em; padding: 3px 5px; }
+    .modal { padding: 14px; width: 92%; font-size: 0.9em; }
+    .modal h3 { font-size: 1.08em; }
+    .modal .description, .modal .examples { font-size: 0.96em; }
+    .modal .examples code { font-size: 1em; padding: 2px 6px; }
+    .modal .examples .copy-example { font-size: 0.72em; padding: 2px 6px; }
 }
-</style>
 
-<svg style="display:none">
-  <symbol id="icon-copy" viewBox="0 0 24 24">
-    <path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z" fill="currentColor"/>
-  </symbol>
-  <symbol id="icon-info" viewBox="0 0 24 24">
-    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z" fill="currentColor"/>
-  </symbol>
-</svg>
+
+</style>
 
 <script>
 function copyToClipboard(el) {
-    const text = el.innerText.trim();
+    const text = el.textContent.trim();
     navigator.clipboard.writeText(text).then(() => {
         showNotification(`Скопировано: ${text}`);
     }).catch(() => {
@@ -378,11 +308,10 @@ function showNotification(text) {
     n.textContent = text;
     n.style.display = 'block';
     clearTimeout(n.timeout);
-    n.timeout = setTimeout(() => n.style.display = 'none', 2500);
+    n.timeout = setTimeout(() => n.style.display = 'none', 2000);
 }
 
 let modalOverlay = null;
-let startY = 0;
 
 function showCommandInfo(data) {
     if (!modalOverlay) {
@@ -398,34 +327,24 @@ function showCommandInfo(data) {
             </div>
         `;
         document.body.appendChild(modalOverlay);
-
-        modalOverlay.addEventListener('click', (e) => {
-            if (e.target === modalOverlay) closeModal();
-        });
-
+        modalOverlay.addEventListener('click', e => { if (e.target === modalOverlay) closeModal(); });
         modalOverlay.querySelector('.close').addEventListener('click', closeModal);
-
-        const modal = modalOverlay.querySelector('.modal');
-        modal.addEventListener('touchstart', (e) => {
-            startY = e.touches[0].clientY;
-        });
-        modal.addEventListener('touchmove', (e) => {
-            const diff = e.touches[0].clientY - startY;
-            if (diff > 100) closeModal();
-        });
     }
 
     const modal = modalOverlay.querySelector('.modal');
     modal.querySelector('h3').textContent = data.command;
     modal.querySelector('.access').textContent = `Доступно для: ${data.access}`;
     modal.querySelector('.description').innerHTML = data.fullDesc;
-    
+
     if (data.examples) {
-        const examples = data.examples.split('<br>').map(ex => {
-            const cmd = ex.trim();
-            return `<code>${cmd}</code><button class="copy-example" onclick="copyToClipboard(this.previousElementSibling)"><svg><use href="#icon-copy"/></svg></button>`;
-        }).join('<br>');
-        modal.querySelector('.examples').innerHTML = `<strong>Примеры:</strong><br>${examples}`;
+        const examples = data.examples.split('<br>').map(ex => ex.trim()).filter(ex => ex);
+        const html = examples.map(ex => 
+            `<div style="margin: 6px 0; display: flex; align-items: center;">
+                <code>${ex}</code>
+                <button class="copy-example" onclick="copyToClipboard(this.previousElementSibling)">⧉ Копировать</button>
+            </div>`
+        ).join('');
+        modal.querySelector('.examples').innerHTML = `<strong>Примеры:</strong><br>${html}`;
     } else {
         modal.querySelector('.examples').innerHTML = '';
     }
@@ -438,14 +357,12 @@ function closeModal() {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-    const headers = document.querySelectorAll('h2');
-    headers.forEach(header => {
+    document.querySelectorAll('h2').forEach(header => {
         const list = header.nextElementSibling;
         if (list && list.tagName === 'UL') {
-            header.style.cursor = 'pointer';
             header.addEventListener('click', () => {
                 const isOpen = header.classList.contains('open');
-                headers.forEach(h => {
+                document.querySelectorAll('h2').forEach(h => {
                     h.classList.remove('open');
                     const ul = h.nextElementSibling;
                     if (ul && ul.tagName === 'UL') ul.classList.remove('visible');
@@ -454,10 +371,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     header.classList.add('open');
                     list.classList.add('visible');
                     setTimeout(() => {
-                        const firstCommand = list.querySelector('li .command');
-                        if (firstCommand) {
-                            firstCommand.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                        }
+                        const cmd = list.querySelector('.command');
+                        cmd && cmd.scrollIntoView({ behavior: 'smooth', block: 'center' });
                     }, 300);
                 }
             });
@@ -469,117 +384,732 @@ document.addEventListener('DOMContentLoaded', () => {
 
 <body>
 
-<h1>Команды Банка Гильдии</h1>
+<h1>Команды Банка</h1>
 
 <!-- 1. ОХОТА -->
 <h2>🎯 Охота</h2>
 <ul>
-<li><span class="command">!stats</span><span class="short-desc">ваша статистика</span><div class="actions"><button onclick="copyToClipboard(this.parentNode.previousElementSibling.previousElementSibling)"><svg><use href="#icon-copy"/></svg> Копировать</button><button class="info-btn" onclick='showCommandInfo({command:"!stats", access:"R1+", fullDesc:"Показывает вашу личную статистику подарков: Донат и Охота.", examples:"!stats"})'><svg width="12" height="12"><use href="#icon-info"/></svg> Инфо</button></div></li>
-<li><span class="command">!stats all</span><span class="short-desc">сводка по гильдии</span><div class="actions"><button onclick="copyToClipboard(this.parentNode.previousElementSibling.previousElementSibling)"><svg><use href="#icon-copy"/></svg> Копировать</button><button class="info-btn" onclick='showCommandInfo({command:"!stats all", access:"R1+", fullDesc:"Общая статистика гильдии: кто сколько Потратил или убил монстров. .", examples:"!stats all"})'><svg width="12" height="12"><use href="#icon-info"/></svg> Инфо</button></div></li>
-<li><span class="command">!pstats [ник]</span><span class="short-desc">статистика игрока</span><div class="actions"><button onclick="copyToClipboard(this.parentNode.previousElementSibling.previousElementSibling)"><svg><use href="#icon-copy"/></svg> Копировать</button><button class="info-btn" onclick='showCommandInfo({command:"!pstats [ник]", access:"R4", fullDesc:"Статистика подарков конкретного игрока.<br><br><strong>Внимание:</strong> Если в никнейме есть пробел, замените его на нижнее подчеркивание (_). Пример: Player_1. Если два пробела, то два подчеркивания.", examples:"!pstats Player123<br>!pstats Player_1"})'><svg width="12" height="12"><use href="#icon-info"/></svg> Инфо</button></div></li>
-<li><span class="command">!hunt [x] [y]</span><span class="short-desc">атаковать монстра</span><div class="actions"><button onclick="copyToClipboard(this.parentNode.previousElementSibling.previousElementSibling)"><svg><use href="#icon-copy"/></svg> Копировать</button><button class="info-btn" onclick='showCommandInfo({command:"!hunt [x] [y]", access:"Админов банка ", fullDesc:"Наносит один удар по монстру в указанных координатах.Чтобы полностью уничтожить монстра, повторяйте команду, пока он не будет побеждён..", examples:"!hunt 150 250"})'><svg width="12" height="12"><use href="#icon-info"/></svg> Инфо</button></div></li>
-<li><span class="command">!hunt [on/off]</span><span class="short-desc">автоохота</span><div class="actions"><button onclick="copyToClipboard(this.parentNode.previousElementSibling.previousElementSibling)"><svg><use href="#icon-copy"/></svg> Копировать</button><button class="info-btn" onclick='showCommandInfo({command:"!hunt [on/off]", access:"Админов банка ", fullDesc:"Включает или выключает автоматическую охоту. ", examples:"!hunt on<br>!hunt off"})'><svg width="12" height="12"><use href="#icon-info"/></svg> Инфо</button></div></li>
-<li><span class="command">!busrank</span><span class="short-desc">повысить ранг</span><div class="actions"><button onclick="copyToClipboard(this.parentNode.previousElementSibling.previousElementSibling)"><svg><use href="#icon-copy"/></svg> Копировать</button><button class="info-btn" onclick='showCommandInfo({command:"!busrank", access:"Админов банка ", fullDesc:"Автоматически повышает до R2 всех, кто выполнил норму охоты. Запускается раз в цикл.", examples:"!busrank"})'><svg width="12" height="12"><use href="#icon-info"/></svg> Инфо</button></div></li>
-<li><span class="command">!resetstats</span><span class="short-desc">сброс статистики</span><div class="actions"><button onclick="copyToClipboard(this.parentNode.previousElementSibling.previousElementSibling)"><svg><use href="#icon-copy"/></svg> Копировать</button><button class="info-btn" onclick='showCommandInfo({command:"!resetstats", access:"Админов банка ", fullDesc:"Сбрасывает статистику охоты гильдии. Используйте перед новым циклом.", examples:"!resetstats"})'><svg width="12" height="12"><use href="#icon-info"/></svg> Инфо</button></div></li>
+<li>
+    <div class="command-line">
+        <span class="command">!stats</span>
+        <button class="copy-btn" onclick="copyToClipboard(this.previousElementSibling)">⧉ Копировать</button>
+    </div>
+    <div class="desc-line">
+        <span class="short-desc">🔹 ваша статистика</span>
+        <button class="info-btn" onclick='showCommandInfo({command:"!stats", access:"R1+", fullDesc:"Показывает вашу личную статистику подарков: Донат и Охота.", examples:"!stats"})'>⚠️ Подробнее</button>
+    </div>
+</li>
+<li>
+    <div class="command-line">
+        <span class="command">!stats all</span>
+        <button class="copy-btn" onclick="copyToClipboard(this.previousElementSibling)">⧉ Копировать</button>
+    </div>
+    <div class="desc-line">
+        <span class="short-desc">🔹 сводка по гильдии</span>
+        <button class="info-btn" onclick='showCommandInfo({command:"!stats all", access:"R1+", fullDesc:"Общая статистика гильдии: кто сколько Потратил или убил монстров.", examples:"!stats all"})'>⚠️ Подробнее</button>
+    </div>
+</li>
+<li>
+    <div class="command-line">
+        <span class="command">!pstats ник</span>
+        <button class="copy-btn" onclick="copyToClipboard(this.previousElementSibling)">⧉ Копировать</button>
+    </div>
+    <div class="desc-line">
+        <span class="short-desc">🔹 статистика игрока</span>
+        <button class="info-btn" onclick='showCommandInfo({command:"!pstats ник", access:"R4", fullDesc:"Статистика подарков конкретного игрока.", examples:"!pstats Player_213123"})'>⚠️ Подробнее</button>
+    </div>
+</li>
+<li>
+    <div class="command-line">
+        <span class="command">!hunt x y</span>
+        <button class="copy-btn" onclick="copyToClipboard(this.previousElementSibling)">⧉ Копировать</button>
+    </div>
+    <div class="desc-line">
+        <span class="short-desc">🔹 атаковать монстра</span>
+        <button class="info-btn" onclick='showCommandInfo({command:"!hunt x y", access:"Админов банка", fullDesc:"Наносит один удар по монстру в указанных координатах. Чтобы полностью уничтожить монстра, повторяйте команду, пока он не будет побеждён.", examples:"!hunt 150 250"})'>⚠️ Подробнее</button>
+    </div>
+</li>
+<li>
+    <div class="command-line">
+        <span class="command">!hunt on/off</span>
+        <button class="copy-btn" onclick="copyToClipboard(this.previousElementSibling)">⧉ Копировать</button>
+    </div>
+    <div class="desc-line">
+        <span class="short-desc">🔹 автоохота</span>
+        <button class="info-btn" onclick='showCommandInfo({command:"!hunt on/off", access:"Админов банка", fullDesc:"Включает или выключает автоматическую охоту.", examples:"!hunt on<br>!hunt off"})'>⚠️ Подробнее</button>
+    </div>
+</li>
+<li>
+    <div class="command-line">
+        <span class="command">!busrank</span>
+        <button class="copy-btn" onclick="copyToClipboard(this.previousElementSibling)">⧉ Копировать</button>
+    </div>
+    <div class="desc-line">
+        <span class="short-desc">🔹 повысить ранг</span>
+        <button class="info-btn" onclick='showCommandInfo({command:"!busrank", access:"Админов банка", fullDesc:"Автоматически повышает до R2 всех, кто выполнил норму охоты. Запускается раз в цикл.", examples:"!busrank"})'>⚠️ Подробнее</button>
+    </div>
+</li>
+<li>
+    <div class="command-line">
+        <span class="command">!resetstats</span>
+        <button class="copy-btn" onclick="copyToClipboard(this.previousElementSibling)">⧉ Копировать</button>
+    </div>
+    <div class="desc-line">
+        <span class="short-desc">🔹 сброс статистики</span>
+        <button class="info-btn" onclick='showCommandInfo({command:"!resetstats", access:"Админов банка", fullDesc:"Сбрасывает статистику охоты гильдии. ⚠️ Все данные об охоте/донат будут утеряны. ", examples:"!resetstats"})'>⚠️ Подробнее</button>
+    </div>
+</li>
 </ul>
 
 <!-- 2. УПРАВЛЕНИЕ ГИЛЬДИЕЙ -->
 <h2>🔰 Управление гильдией</h2>
 <ul>
-<li><span class="command">!whitelist [ник] [ранг]</span><span class="short-desc">автоприём</span><div class="actions"><button onclick="copyToClipboard(this.parentNode.previousElementSibling.previousElementSibling)"><svg><use href="#icon-copy"/></svg> Копировать</button><button class="info-btn" onclick='showCommandInfo({command:"!whitelist [ник] [ранг]", access:"R4", fullDesc:"Требуется: бот с рангом R4 Добавляет игрока в белый список с указанным рангом. Игрок автоматически попадает в автоприём гильдии.<br><br><strong>Внимание:</strong> Если в никнейме есть пробел, замените его на нижнее подчеркивание (_). Пример: Player_1. Если два пробела, то два подчеркивания.", examples:"!whitelist Player R3<br>!whitelist Player_1 R3"})'><svg width="12" height="12"><use href="#icon-info"/></svg> Инфо</button></div></li>
-<li><span class="command">!unlistwhite [ник]</span><span class="short-desc">убрать из автоприёма</span><div class="actions"><button onclick="copyToClipboard(this.parentNode.previousElementSibling.previousElementSibling)"><svg><use href="#icon-copy"/></svg> Копировать</button><button class="info-btn" onclick='showCommandInfo({command:"!unlistwhite [ник]", access:"R4", fullDesc:"Удаляет игрока из белого списка.<br><br><strong>Внимание:</strong> Если в никнейме есть пробел, замените его на нижнее подчеркивание (_). Пример: Player_1. Если два пробела, то два подчеркивания.", examples:"!unlistwhite Player<br>!unlistwhite Player_1"})'><svg width="12" height="12"><use href="#icon-info"/></svg> Инфо</button></div></li>
-<li><span class="command">!whitelist</span><span class="short-desc">список</span><div class="actions"><button onclick="copyToClipboard(this.parentNode.previousElementSibling.previousElementSibling)"><svg><use href="#icon-copy"/></svg> Копировать</button><button class="info-btn" onclick='showCommandInfo({command:"!whitelist", access:"R4", fullDesc:"Выводит всех игроков в белом списке.", examples:"!whitelist"})'><svg width="12" height="12"><use href="#icon-info"/></svg> Инфо</button></div></li>
-<li><span class="command">!blacklist [ник]</span><span class="short-desc">чёрный список</span><div class="actions"><button onclick="copyToClipboard(this.parentNode.previousElementSibling.previousElementSibling)"><svg><use href="#icon-copy"/></svg> Копировать</button><button class="info-btn" onclick='showCommandInfo({command:"!blacklist [ник]", access:"R4", fullDesc:"Требуется: бот с рангом R4 Блокирует вход и кикает игрока из гильдии.<br><br><strong>Внимание:</strong> Если в никнейме есть пробел, замените его на нижнее подчеркивание (_). Пример: Player_1. Если два пробела, то два подчеркивания.", examples:"!blacklist Troll<br>!blacklist Player_1"})'><svg width="12" height="12"><use href="#icon-info"/></svg> Инфо</button></div></li>
-<li><span class="command">!unlistblack [ник]</span><span class="short-desc">убрать из чёрного</span><div class="actions"><button onclick="copyToClipboard(this.parentNode.previousElementSibling.previousElementSibling)"><svg><use href="#icon-copy"/></svg> Копировать</button><button class="info-btn" onclick='showCommandInfo({command:"!unlistblack [ник]", access:"R4", fullDesc:"Удаляет игрока из чёрного списка.<br><br><strong>Внимание:</strong> Если в никнейме есть пробел, замените его на нижнее подчеркивание (_). Пример: Player_1. Если два пробела, то два подчеркивания.", examples:"!unlistblack Troll<br>!unlistblack Player_1"})'><svg width="12" height="12"><use href="#icon-info"/></svg> Инфо</button></div></li>
-<li><span class="command">!blacklist</span><span class="short-desc">список</span><div class="actions"><button onclick="copyToClipboard(this.parentNode.previousElementSibling.previousElementSibling)"><svg><use href="#icon-copy"/></svg> Копировать</button><button class="info-btn" onclick='showCommandInfo({command:"!blacklist", access:"R4", fullDesc:"Выводит список игроков в чёрном списке.", examples:"!blacklist"})'><svg width="12" height="12"><use href="#icon-info"/></svg> Инфо</button></div></li>
-<li><span class="command">!members</span><span class="short-desc">обновить список</span><div class="actions"><button onclick="copyToClipboard(this.parentNode.previousElementSibling.previousElementSibling)"><svg><use href="#icon-copy"/></svg> Копировать</button><button class="info-btn" onclick='showCommandInfo({command:"!members", access:"Админов банка ", fullDesc:"Принудительно обновляет список участников. Полезно после смены гильдии.", examples:"!members"})'><svg width="12" height="12"><use href="#icon-info"/></svg> Инфо</button></div></li>
-<li><span class="command">!addtitle [ник] [титул]</span><span class="short-desc">дать титул</span><div class="actions"><button onclick="copyToClipboard(this.parentNode.previousElementSibling.previousElementSibling)"><svg><use href="#icon-copy"/></svg> Копировать</button><button class="info-btn" onclick='showCommandInfo({command:"!addtitle [ник] [титул]", access:"R4", fullDesc:"Даёт титул игроку (если банк — регент).<br><br><strong>Внимание:</strong> Если в никнейме есть пробел, замените его на нижнее подчеркивание (_). Пример: Player_1. Если два пробела, то два подчеркивания.", examples:"!addtitle Player Король<br>!addtitle Player_1 Король"})'><svg width="12" height="12"><use href="#icon-info"/></svg> Инфо</button></div></li>
-<li><span class="command">!deltitle [титул]</span><span class="short-desc">убрать титул</span><div class="actions"><button onclick="copyToClipboard(this.parentNode.previousElementSibling.previousElementSibling)"><svg><use href="#icon-copy"/></svg> Копировать</button><button class="info-btn" onclick='showCommandInfo({command:"!deltitle [титул]", access:"R4", fullDesc:"Удаляет указанный титул у всех игроков.", examples:"!deltitle Король"})'><svg width="12" height="12"><use href="#icon-info"/></svg> Инфо</button></div></li>
-<li><span class="command">!yell [сообщение]</span><span class="short-desc">сообщение в чат</span><div class="actions"><button onclick="copyToClipboard(this.parentNode.previousElementSibling.previousElementSibling)"><svg><use href="#icon-copy"/></svg> Копировать</button><button class="info-btn" onclick='showCommandInfo({command:"!yell [сообщение]", access:"R4", fullDesc:"Отправляет сообщение в чат гильдии от имени банка.", examples:"!yell Атака через 10 мин!"})'><svg width="12" height="12"><use href="#icon-info"/></svg> Инфо</button></div></li>
-<li><span class="command">!clearboard</span><span class="short-desc">очистить доску</span><div class="actions"><button onclick="copyToClipboard(this.parentNode.previousElementSibling.previousElementSibling)"><svg><use href="#icon-copy"/></svg> Копировать</button><button class="info-btn" onclick='showCommandInfo({command:"!clearboard", access:"R4", fullDesc:"Полностью очищает доску Поручения гильдии. Требуется ранг R4 у банка.", examples:"!clearboard"})'><svg width="12" height="12"><use href="#icon-info"/></svg> Инфо</button></div></li>
-<li><span class="command">!purge</span><span class="short-desc">очистить чат</span><div class="actions"><button onclick="copyToClipboard(this.parentNode.previousElementSibling.previousElementSibling)"><svg><use href="#icon-copy"/></svg> Копировать</button><button class="info-btn" onclick='showCommandInfo({command:"!purge", access:"R4", fullDesc:"Удаляет последние 50 сообщений в чате гильдии.", examples:"!purge"})'><svg width="12" height="12"><use href="#icon-info"/></svg> Инфо</button></div></li>
-<li><span class="command">!guild [тег]</span><span class="short-desc">смена гильдии</span><div class="actions"><button onclick="copyToClipboard(this.parentNode.previousElementSibling.previousElementSibling)"><svg><use href="#icon-copy"/></svg> Копировать</button><button class="info-btn" onclick='showCommandInfo({command:"!guild [тег]", access:"Админов банка ", fullDesc:"Покидает текущую гильдию и присоединяется к новой по тегу.", examples:"!guild AB3"})'><svg width="12" height="12"><use href="#icon-info"/></svg> Инфо</button></div></li>
+<li>
+    <div class="command-line">
+        <span class="command">!whitelist ник ранг</span>
+        <button class="copy-btn" onclick="copyToClipboard(this.previousElementSibling)">⧉ Копировать</button>
+    </div>
+    <div class="desc-line">
+        <span class="short-desc">🔹 автоприём</span>
+        <button class="info-btn" onclick='showCommandInfo({command:"!whitelist ник ранг", access:"R4", fullDesc:"Требуется: бот с рангом R4 Добавляет игрока в белый список с указанным рангом. Игрок автоматически попадает в автоприём гильдии.", examples:"!whitelist Player_213 R3"})'>⚠️ Подробнее</button>
+    </div>
+</li>
+<li>
+    <div class="command-line">
+        <span class="command">!unlistwhite ник</span>
+        <button class="copy-btn" onclick="copyToClipboard(this.previousElementSibling)">⧉ Копировать</button>
+    </div>
+    <div class="desc-line">
+        <span class="short-desc">🔹 убрать из автоприёма</span>
+        <button class="info-btn" onclick='showCommandInfo({command:"!unlistwhite ник", access:"R4", fullDesc:"Удаляет игрока из белого списка.", examples:"!unlistwhite Player_213"})'>⚠️ Подробнее</button>
+    </div>
+</li>
+<li>
+    <div class="command-line">
+        <span class="command">!whitelist</span>
+        <button class="copy-btn" onclick="copyToClipboard(this.previousElementSibling)">⧉ Копировать</button>
+    </div>
+    <div class="desc-line">
+        <span class="short-desc">🔹 список</span>
+        <button class="info-btn" onclick='showCommandInfo({command:"!whitelist", access:"R4", fullDesc:"Выводит всех игроков в белом списке.", examples:"!whitelist"})'>⚠️ Подробнее</button>
+    </div>
+</li>
+<li>
+    <div class="command-line">
+        <span class="command">!blacklist ник</span>
+        <button class="copy-btn" onclick="copyToClipboard(this.previousElementSibling)">⧉ Копировать</button>
+    </div>
+    <div class="desc-line">
+        <span class="short-desc">🔹 чёрный список</span>
+        <button class="info-btn" onclick='showCommandInfo({command:"!blacklist ник", access:"R4", fullDesc:"Требуется: бот с рангом R4 Блокирует вход и кикает игрока из гильдии.", examples:"!blacklist Troll"})'>⚠️ Подробнее</button>
+    </div>
+</li>
+<li>
+    <div class="command-line">
+        <span class="command">!unlistblack ник</span>
+        <button class="copy-btn" onclick="copyToClipboard(this.previousElementSibling)">⧉ Копировать</button>
+    </div>
+    <div class="desc-line">
+        <span class="short-desc">🔹 убрать из чёрного</span>
+        <button class="info-btn" onclick='showCommandInfo({command:"!unlistblack ник", access:"R4", fullDesc:"Удаляет игрока из чёрного списка.", examples:"!unlistblack Troll"})'>⚠️ Подробнее</button>
+    </div>
+</li>
+<li>
+    <div class="command-line">
+        <span class="command">!blacklist</span>
+        <button class="copy-btn" onclick="copyToClipboard(this.previousElementSibling)">⧉ Копировать</button>
+    </div>
+    <div class="desc-line">
+        <span class="short-desc">🔹 список</span>
+        <button class="info-btn" onclick='showCommandInfo({command:"!blacklist", access:"R4", fullDesc:"Выводит список игроков в чёрном списке.", examples:"!blacklist"})'>⚠️ Подробнее</button>
+    </div>
+</li>
+<li>
+    <div class="command-line">
+        <span class="command">!members</span>
+        <button class="copy-btn" onclick="copyToClipboard(this.previousElementSibling)">⧉ Копировать</button>
+    </div>
+    <div class="desc-line">
+        <span class="short-desc">🔹 обновить список</span>
+        <button class="info-btn" onclick='showCommandInfo({command:"!members", access:"Админов банка", fullDesc:"Принудительно обновляет список участников. Полезно после смены гильдии.", examples:"!members"})'>⚠️ Подробнее</button>
+    </div>
+</li>
+<li>
+    <div class="command-line">
+        <span class="command">!addtitle ник титул</span>
+        <button class="copy-btn" onclick="copyToClipboard(this.previousElementSibling)">⧉ Копировать</button>
+    </div>
+    <div class="desc-line">
+        <span class="short-desc">🔹 дать титул</span>
+        <button class="info-btn" onclick='showCommandInfo({command:"!addtitle ник титул", access:"R4", fullDesc:"Даёт титул игроку (если банк — регент).", examples:"!addtitle Player_213 Король"})'>⚠️ Подробнее</button>
+    </div>
+</li>
+<li>
+    <div class="command-line">
+        <span class="command">!deltitle титул</span>
+        <button class="copy-btn" onclick="copyToClipboard(this.previousElementSibling)">⧉ Копировать</button>
+    </div>
+    <div class="desc-line">
+        <span class="short-desc">🔹 убрать титул</span>
+        <button class="info-btn" onclick='showCommandInfo({command:"!deltitle титул", access:"R4", fullDesc:"Удаляет указанный титул у всех игроков.", examples:"!deltitle Король"})'>⚠️ Подробнее</button>
+    </div>
+</li>
+<li>
+    <div class="command-line">
+        <span class="command">!yell сообщение</span>
+        <button class="copy-btn" onclick="copyToClipboard(this.previousElementSibling)">⧉ Копировать</button>
+    </div>
+    <div class="desc-line">
+        <span class="short-desc">🔹 сообщение в чат</span>
+        <button class="info-btn" onclick='showCommandInfo({command:"!yell сообщение", access:"R4", fullDesc:"Отправляет сообщение в чат гильдии от имени банка.", examples:"!yell Атака через 10 мин!"})'>⚠️ Подробнее</button>
+    </div>
+</li>
+<li>
+    <div class="command-line">
+        <span class="command">!clearboard</span>
+        <button class="copy-btn" onclick="copyToClipboard(this.previousElementSibling)">⧉ Копировать</button>
+    </div>
+    <div class="desc-line">
+        <span class="short-desc">🔹 очистить доску</span>
+        <button class="info-btn" onclick='showCommandInfo({command:"!clearboard", access:"R4", fullDesc:"Полностью очищает доску Поручения гильдии. Требуется ранг R4 у банка.", examples:"!clearboard"})'>⚠️ Подробнее</button>
+    </div>
+</li>
+<li>
+    <div class="command-line">
+        <span class="command">!purge</span>
+        <button class="copy-btn" onclick="copyToClipboard(this.previousElementSibling)">⧉ Копировать</button>
+    </div>
+    <div class="desc-line">
+        <span class="short-desc">🔹 очистить чат</span>
+        <button class="info-btn" onclick='showCommandInfo({command:"!purge", access:"R4", fullDesc:"Удаляет последние 50 сообщений в чат гильдии.", examples:"!purge"})'>⚠️ Подробнее</button>
+    </div>
+</li>
+<li>
+    <div class="command-line">
+        <span class="command">!guild тег</span>
+        <button class="copy-btn" onclick="copyToClipboard(this.previousElementSibling)">⧉ Копировать</button>
+    </div>
+    <div class="desc-line">
+        <span class="short-desc">🔹 смена гильдии</span>
+        <button class="info-btn" onclick='showCommandInfo({command:"!guild тег", access:"Админов банка", fullDesc:"Покидает текущую гильдию и присоединяется к новой по тегу.", examples:"!guild AB3"})'>⚠️ Подробнее</button>
+    </div>
+</li>
 </ul>
 
 <!-- 3. ПЕРЕМЕЩЕНИЕ -->
-<h2>✈️ Перемещение</h2>
+<h2>✈️ Перемещение замка</h2>
 <ul>
-<li><span class="command">!recall all</span><span class="short-desc">отозвать</span><div class="actions"><button onclick="copyToClipboard(this.parentNode.previousElementSibling.previousElementSibling)"><svg><use href="#icon-copy"/></svg> Копировать</button><button class="info-btn" onclick='showCommandInfo({command:"!recall all", access:"Админов банка ", fullDesc:"Отзывает все войска банка (не включая марширующие).", examples:"!recall all"})'><svg width="12" height="12"><use href="#icon-info"/></svg> Инфо</button></div></li>
-<li><span class="command">!pos</span><span class="short-desc">координаты банка</span><div class="actions"><button onclick="copyToClipboard(this.parentNode.previousElementSibling.previousElementSibling)"><svg><use href="#icon-copy"/></svg> Копировать</button><button class="info-btn" onclick='showCommandInfo({command:"!pos", access:"R1+", fullDesc:"Показывает текущие координаты банка. Добавьте <code>chat</code> — вывод в чат.", examples:"!pos<br>!pos chat"})'><svg width="12" height="12"><use href="#icon-info"/></svg> Инфо</button></div></li>
-<li><span class="command">!relocate [X] [Y]</span><span class="short-desc">переместить</span><div class="actions"><button onclick="copyToClipboard(this.parentNode.previousElementSibling.previousElementSibling)"><svg><use href="#icon-copy"/></svg> Копировать</button><button class="info-btn" onclick='showCommandInfo({command:"!relocate [X] [Y]", access:"Админов банка ", fullDesc:"Мгновенно перемещает банк в указанные координаты.<br><br><strong>Внимание:</strong> Если у банка развернуты войска, переместить нельзя. Сначала используйте <code>!recall all</code> или <code>!gryphon</code> для возврата войск. Дождитесь возвращения и повторите команду.", examples:"!relocate 345 678"})'><svg width="12" height="12"><use href="#icon-info"/></svg> Инфо</button></div></li>
-<li><span class="command">!relocate rand</span><span class="short-desc">случайное</span><div class="actions"><button onclick="copyToClipboard(this.parentNode.previousElementSibling.previousElementSibling)"><svg><use href="#icon-copy"/></svg> Копировать</button><button class="info-btn" onclick='showCommandInfo({command:"!relocate rand", access:"Админов банка ", fullDesc:"Перемещает банк в случайную точку в текущем королевстве.<br><br><strong>Внимание:</strong> Если у банка развернуты войска, переместить нельзя. Сначала используйте <code>!recall all</code> или <code>!gryphon</code> для возврата войск. Дождитесь возвращения и повторите команду.", examples:"!relocate rand"})'><svg width="12" height="12"><use href="#icon-info"/></svg> Инфо</button></div></li>
-<li><span class="command">!migrate [K] [X:Y]</span><span class="short-desc">миграция</span><div class="actions"><button onclick="copyToClipboard(this.parentNode.previousElementSibling.previousElementSibling)"><svg><use href="#icon-copy"/></svg> Копировать</button><button class="info-btn" onclick='showCommandInfo({command:"!migrate [K] [X:Y]", access:"Админов банка ", fullDesc:"Мигрирует банк в королевство K по указанным координатам.<br><br><strong>Внимание:</strong> Если у банка развернуты войска, переместить нельзя. Сначала используйте <code>!recall all</code> или <code>!gryphon</code> для возврата войск. Дождитесь возвращения и повторите команду.", examples:"!migrate 60 876:985"})'><svg width="12" height="12"><use href="#icon-info"/></svg> Инфо</button></div></li>
-<li><span class="command">!relocatekvk [K]</span><span class="short-desc">КВК</span><div class="actions"><button onclick="copyToClipboard(this.parentNode.previousElementSibling.previousElementSibling)"><svg><use href="#icon-copy"/></svg> Копировать</button><button class="info-btn" onclick='showCommandInfo({command:"!relocatekvk [K]", access:"Админов банка ", fullDesc:"Случайное перемещение в королевство для КВК.<br><br><strong>Внимание:</strong> Если у банка развернуты войска, переместить нельзя. Сначала используйте <code>!recall all</code> или <code>!gryphon</code> для возврата войск. Дождитесь возвращения и повторите команду.", examples:"!relocatekvk 988"})'><svg width="12" height="12"><use href="#icon-info"/></svg> Инфо</button></div></li>
-<li><span class="command">!joingvg</span><span class="short-desc">экспедиция</span><div class="actions"><button onclick="copyToClipboard(this.parentNode.previousElementSibling.previousElementSibling)"><svg><use href="#icon-copy"/></svg> Копировать</button><button class="info-btn" onclick='showCommandInfo({command:"!joingvg", access:"Админов банка ", fullDesc:"Входит в Экспедицию Гильдий.<br><br><strong>Внимание:</strong> Переместить замок нельзя, если:</strong><br>• За пределами замка есть войска<br>• есть раненые войска<br>• сломана стена<br><br><strong>Что делать:</strong><br>1. Используйте <code>!recall all</code> или <code>!gryphon</code> для возврата войск.<br>2. Дождитесь возвращения.<br>3. Вылечите раненых и почините стену.<br>4. Повторите команду.", examples:"!joingvg"})'><svg width="12" height="12"><use href="#icon-info"/></svg> Инфо</button></div></li>
-<li><span class="command">!leavegvg</span><span class="short-desc">выйти</span><div class="actions"><button onclick="copyToClipboard(this.parentNode.previousElementSibling.previousElementSibling)"><svg><use href="#icon-copy"/></svg> Копировать</button><button class="info-btn" onclick='showCommandInfo({command:"!leavegvg", access:"Админов банка ", fullDesc:"Выходит из Экспедиции Гильдий.<br><br><strong>Внимание:</strong> Если у банка развернуты войска, переместить нельзя. Сначала используйте <code>!recall all</code> или <code>!gryphon</code> для возврата войск. Дождитесь возвращения и повторите команду.", examples:"!leavegvg"})'><svg width="12" height="12"><use href="#icon-info"/></svg> Инфо</button></div></li>
-<li><span class="command">!joinca 1</span><span class="short-desc">Хаос-Арена</span><div class="actions"><button onclick="copyToClipboard(this.parentNode.previousElementSibling.previousElementSibling)"><svg><use href="#icon-copy"/></svg> Копировать</button><button class="info-btn" onclick='showCommandInfo({command:"!joinca 1", access:"Админов банка ", fullDesc:"Присоединяется к Хаос-Арене в королевстве 1. Добавьте <code>f</code> для принудительного входа.<br><br><strong>Внимание:</strong> Переместить замок нельзя, если:</strong><br>• За пределами замка есть войска<br>• есть раненые войска<br>• сломана стена<br><br><strong>Что делать:</strong><br>1. Используйте <code>!recall all</code> или <code>!gryphon</code> для возврата войск.<br>2. Дождитесь возвращения.<br>3. Вылечите раненых и почините стену.<br>4. Повторите команду.", examples:"!joinca 1<br>!joinca 1 f"})'><svg width="12" height="12"><use href="#icon-info"/></svg> Инфо</button></div></li>
-<li><span class="command">!leaveca</span><span class="short-desc">выйти</span><div class="actions"><button onclick="copyToClipboard(this.parentNode.previousElementSibling.previousElementSibling)"><svg><use href="#icon-copy"/></svg> Копировать</button><button class="info-btn" onclick='showCommandInfo({command:"!leaveca", access:"Админов банка ", fullDesc:"Выходит из Хаос-Арены.<br><br><strong>Внимание:</strong> Если у банка развернуты войска, переместить нельзя. Сначала используйте <code>!recall all</code> или <code>!gryphon</code> для возврата войск. Дождитесь возвращения и повторите команду.", examples:"!leaveca"})'><svg width="12" height="12"><use href="#icon-info"/></svg> Инфо</button></div></li>
-<li><span class="command">!joinda</span><span class="short-desc">Арена Драконов</span><div class="actions"><button onclick="copyToClipboard(this.parentNode.previousElementSibling.previousElementSibling)"><svg><use href="#icon-copy"/></svg> Копировать</button><button class="info-btn" onclick='showCommandInfo({command:"!joinda", access:"Админов банка ", fullDesc:"Входит в Арену Драконов.<br><br><strong>Внимание:</strong> Переместить замок нельзя, если:</strong><br>• За пределами замка есть войска<br>• есть раненые войска<br>• сломана стена<br><br><strong>Что делать:</strong><br>1. Используйте <code>!recall all</code> или <code>!gryphon</code> для возврата войск.<br>2. Дождитесь возвращения.<br>3. Вылечите раненых и почините стену.<br>4. Повторите команду.", examples:"!joinda"})'><svg width="12" height="12"><use href="#icon-info"/></svg> Инфо</button></div></li>
-<li><span class="command">!leaveda</span><span class="short-desc">выйти</span><div class="actions"><button onclick="copyToClipboard(this.parentNode.previousElementSibling.previousElementSibling)"><svg><use href="#icon-copy"/></svg> Копировать</button><button class="info-btn" onclick='showCommandInfo({command:"!leaveda", access:"Админов банка ", fullDesc:"Выходит из Арены Драконов.<br><br><strong>Внимание:</strong> Если у банка развернуты войска, переместить нельзя. Сначала используйте <code>!recall all</code> или <code>!gryphon</code> для возврата войск. Дождитесь возвращения и повторите команду.", examples:"!leaveda"})'><svg width="12" height="12"><use href="#icon-info"/></svg> Инфо</button></div></li>
+<li>
+    <div class="command-line">
+        <span class="command">!pos</span>
+        <button class="copy-btn" onclick="copyToClipboard(this.previousElementSibling)">⧉ Копировать</button>
+    </div>
+    <div class="desc-line">
+        <span class="short-desc">🔹 координаты банка</span>
+        <button class="info-btn" onclick='showCommandInfo({command:"!pos", access:"R1+", fullDesc:"Показывает текущие координаты банка. Добавьте <code>chat</code> — вывод в чат.", examples:"!pos<br>!pos chat"})'>⚠️ Подробнее</button>
+    </div>
+</li>
+<li>
+    <div class="command-line">
+        <span class="command">!relocate X Y</span>
+        <button class="copy-btn" onclick="copyToClipboard(this.previousElementSibling)">⧉ Копировать</button>
+    </div>
+    <div class="desc-line">
+        <span class="short-desc">🔹 переместить</span>
+        <button class="info-btn" onclick='showCommandInfo({command:"!relocate X Y", access:"Админов банка", fullDesc:"Мгновенно перемещает банк в указанные координаты.<br><br><strong>Внимание:</strong> Если у банка развернуты войска, переместить нельзя. Сначала используйте <code>!recall</code> или <code>!gryphon</code> для возврата войск. Дождитесь возвращения и повторите команду.", examples:"!relocate 345 678"})'>⚠️ Подробнее</button>
+    </div>
+</li>
+<li>
+    <div class="command-line">
+        <span class="command">!relocate rand</span>
+        <button class="copy-btn" onclick="copyToClipboard(this.previousElementSibling)">⧉ Копировать</button>
+    </div>
+    <div class="desc-line">
+        <span class="short-desc">🔹 случайное</span>
+        <button class="info-btn" onclick='showCommandInfo({command:"!relocate rand", access:"Админов банка", fullDesc:"Перемещает банк в случайную точку в текущем королевстве.<br><br><strong>Внимание:</strong> Если у банка развернуты войска, переместить нельзя. Сначала используйте <code>!recall</code> или <code>!gryphon</code> для возврата войск. Дождитесь возвращения и повторите команду.", examples:"!relocate rand"})'>⚠️ Подробнее</button>
+    </div>
+</li>
+<li>
+    <div class="command-line">
+        <span class="command">!migrate K X Y</span>
+        <button class="copy-btn" onclick="copyToClipboard(this.previousElementSibling)">⧉ Копировать</button>
+    </div>
+    <div class="desc-line">
+        <span class="short-desc">🔹 миграция</span>
+        <button class="info-btn" onclick='showCommandInfo({command:"!migrate K X Y", access:"Админов банка", fullDesc:"Мигрирует банк в королевство K по указанным координатам.<br><br><strong>Внимание:</strong> Если у банка развернуты войска, переместить нельзя. Сначала используйте <code>!recall</code> или <code>!gryphon</code> для возврата войск. Дождитесь возвращения и повторите команду.", examples:"!migrate 60 876 985"})'>⚠️ Подробнее</button>
+    </div>
+</li>
+<li>
+    <div class="command-line">
+        <span class="command">!relocatekvk K</span>
+        <button class="copy-btn" onclick="copyToClipboard(this.previousElementSibling)">⧉ Копировать</button>
+    </div>
+    <div class="desc-line">
+        <span class="short-desc">🔹 КВК</span>
+        <button class="info-btn" onclick='showCommandInfo({command:"!relocatekvk K", access:"Админов банка", fullDesc:"Случайное перемещение в королевство для КВК.<br><br><strong>Внимание:</strong> Если у банка развернуты войска, переместить нельзя. Сначала используйте <code>!recall</code> или <code>!gryphon</code> для возврата войск. Дождитесь возвращения и повторите команду.", examples:"!relocatekvk 988"})'>⚠️ Подробнее</button>
+    </div>
+</li>
+<li>
+    <div class="command-line">
+        <span class="command">!joingvg</span>
+        <button class="copy-btn" onclick="copyToClipboard(this.previousElementSibling)">⧉ Копировать</button>
+    </div>
+    <div class="desc-line">
+        <span class="short-desc">🔹 экспедиция</span>
+        <button class="info-btn" onclick='showCommandInfo({command:"!joingvg", access:"Админов банка", fullDesc:"Входит в Экспедицию Гильдий.<br><br><strong>Внимание:</strong> Переместить замок нельзя, если:<br>• За пределами замка есть войска<br>• есть раненые войска<br>• сломана стена<br><br><strong>Что делать:</strong><br>1. Используйте <code>!recall</code> или <code>!gryphon</code> для возврата войск.<br>2. Дождитесь возвращения.<br>3. Вылечите раненых и почините стену.<br>4. Повторите команду.", examples:"!joingvg"})'>⚠️ Подробнее</button>
+    </div>
+</li>
+<li>
+    <div class="command-line">
+        <span class="command">!leavegvg</span>
+        <button class="copy-btn" onclick="copyToClipboard(this.previousElementSibling)">⧉ Копировать</button>
+    </div>
+    <div class="desc-line">
+        <span class="short-desc">🔹 выйти</span>
+        <button class="info-btn" onclick='showCommandInfo({command:"!leavegvg", access:"Админов банка", fullDesc:"Выходит из Экспедиции Гильдий.<br><br><strong>Внимание:</strong> Если у банка развернуты войска, переместить нельзя. Сначала используйте <code>!recall</code> или <code>!gryphon</code> для возврата войск. Дождитесь возвращения и повторите команду.", examples:"!leavegvg"})'>⚠️ Подробнее</button>
+    </div>
+</li>
+<li>
+    <div class="command-line">
+        <span class="command">!joinca 1</span>
+        <button class="copy-btn" onclick="copyToClipboard(this.previousElementSibling)">⧉ Копировать</button>
+    </div>
+    <div class="desc-line">
+        <span class="short-desc">🔹 Хаос-Арена</span>
+        <button class="info-btn" onclick='showCommandInfo({command:"!joinca 1", access:"Админов банка", fullDesc:"Присоединяется к Хаос-Арене в королевстве 1. Добавьте <code>f</code> для принудительного входа.<br><br><strong>Внимание:</strong> Переместить замок нельзя, если:<br>• За пределами замка есть войска<br>• есть раненые войска<br>• сломана стена<br><br><strong>Что делать:</strong><br>1. Используйте <code>!recall</code> или <code>!gryphon</code> для возврата войск.<br>2. Дождитесь возвращения.<br>3. Вылечите раненых и почините стену.<br>4. Повторите команду.", examples:"!joinca 1<br>!joinca 1 f"})'>⚠️ Подробнее</button>
+    </div>
+</li>
+<li>
+    <div class="command-line">
+        <span class="command">!leaveca</span>
+        <button class="copy-btn" onclick="copyToClipboard(this.previousElementSibling)">⧉ Копировать</button>
+    </div>
+    <div class="desc-line">
+        <span class="short-desc">🔹 выйти</span>
+        <button class="info-btn" onclick='showCommandInfo({command:"!leaveca", access:"Админов банка", fullDesc:"Выходит из Хаос-Арены.<br><br><strong>Внимание:</strong> Если у банка развернуты войска, переместить нельзя. Сначала используйте <code>!recall</code> или <code>!gryphon</code> для возврата войск. Дождитесь возвращения и повторите команду.", examples:"!leaveca"})'>⚠️ Подробнее</button>
+    </div>
+</li>
+<li>
+    <div class="command-line">
+        <span class="command">!joinda</span>
+        <button class="copy-btn" onclick="copyToClipboard(this.previousElementSibling)">⧉ Копировать</button>
+    </div>
+    <div class="desc-line">
+        <span class="short-desc">🔹 Арена Драконов</span>
+        <button class="info-btn" onclick='showCommandInfo({command:"!joinda", access:"Админов банка", fullDesc:"Входит в Арену Драконов.<br><br><strong>Внимание:</strong> Переместить замок нельзя, если:<br>• За пределами замка есть войска<br>• есть раненые войска<br>• сломана стена<br><br><strong>Что делать:</strong><br>1. Используйте <code>!recall</code> или <code>!gryphon</code> для возврата войск.<br>2. Дождитесь возвращения.<br>3. Вылечите раненых и почините стену.<br>4. Повторите команду.", examples:"!joinda"})'>⚠️ Подробнее</button>
+    </div>
+</li>
+<li>
+    <div class="command-line">
+        <span class="command">!leaveda</span>
+        <button class="copy-btn" onclick="copyToClipboard(this.previousElementSibling)">⧉ Копировать</button>
+    </div>
+    <div class="desc-line">
+        <span class="short-desc">🔹 выйти</span>
+        <button class="info-btn" onclick='showCommandInfo({command:"!leaveda", access:"Админов банка", fullDesc:"Выходит из Арены Драконов.<br><br><strong>Внимание:</strong> Если у банка развернуты войска, переместить нельзя. Сначала используйте <code>!recall</code> или <code>!gryphon</code> для возврата войск. Дождитесь возвращения и повторите команду.", examples:"!leaveda"})'>⚠️ Подробнее</button>
+    </div>
+</li>
 </ul>
 
-<!-- 4. БАЛАНС -->
+<!-- 4. УПРАВЛЕНИЕ БАЛАНСОМ -->
 <h2>💰 Управление балансом</h2>
 <ul>
-<li><span class="command">!bal</span><span class="short-desc">ваш баланс</span><div class="actions"><button onclick="copyToClipboard(this.parentNode.previousElementSibling.previousElementSibling)"><svg><use href="#icon-copy"/></svg> Копировать</button><button class="info-btn" onclick='showCommandInfo({command:"!bal", access:"R1+", fullDesc:"Показывает ваш текущий баланс ресурсов в банке.</strong><br><br><strong>Баланс</strong> — это ваш <strong>личный счёт</strong>, который вы можете использовать самостоятельно: забирать ресурсы или передавать их другим игрокам — <strong>без участия админа банка.", examples:"!bal"})'><svg width="12" height="12"><use href="#icon-info"/></svg> Инфо</button></div></li>
-<li><span class="command">!adminbal [ник]</span><span class="short-desc">баланс игрока</span><div class="actions"><button onclick="copyToClipboard(this.parentNode.previousElementSibling.previousElementSibling)"><svg><use href="#icon-copy"/></svg> Копировать</button><button class="info-btn" onclick='showCommandInfo({command:"!adminbal [ник]", access:"R4", fullDesc:"Проверяет баланс ресурсов конкретного игрока.<br><br><strong>Добавьте chat</strong> — вывод в чат.<br><br><strong>Внимание:</strong> Если в никнейме есть пробел, замените его на нижнее подчеркивание (_). Пример: Player_1. Если два пробела, то два подчеркивания.", examples:"!adminbal Player<br>!adminbal Player chat<br>!adminbal Player_1"})'><svg width="12" height="12"><use href="#icon-info"/></svg> Инфо</button></div></li>
-<li><span class="command">!adminbal</span><span class="short-desc">общий баланс</span><div class="actions"><button onclick="copyToClipboard(this.parentNode.previousElementSibling.previousElementSibling)"><svg><use href="#icon-copy"/></svg> Копировать</button><button class="info-btn" onclick='showCommandInfo({command:"!adminbal", access:"R4", fullDesc:"Показывает общий баланс всех ресурсов банка.<br><br><strong>Добавьте chat</strong> — вывод в чат.", examples:"!adminbal<br>!adminbal chat"})'><svg width="12" height="12"><use href="#icon-info"/></svg> Инфо</button></div></li>
-<li><span class="command">!adminbag</span><span class="short-desc">сумка банка</span><div class="actions"><button onclick="copyToClipboard(this.parentNode.previousElementSibling.previousElementSibling)"><svg><use href="#icon-copy"/></svg> Копировать</button><button class="info-btn" onclick='showCommandInfo({command:"!adminbag", access:"R4", fullDesc:"Показывает ресурсы, находящиеся в сумке банка (не в балансе).<br><br><strong>Добавьте chat</strong> — вывод в чат.", examples:"!adminbag<br>!adminbag chat"})'><svg width="12" height="12"><use href="#icon-info"/></svg> Инфо</button></div></li>
-<li><span class="command">!setbal [ник] [тип] [кол-во]</span><span class="short-desc">Установить баланс игроку</span><div class="actions"><button onclick="copyToClipboard(this.parentNode.previousElementSibling.previousElementSibling)"><svg><use href="#icon-copy"/></svg> Копировать</button><button class="info-btn" onclick='showCommandInfo({command:"!setbal [ник] [тип] [кол-во]", access:"Админов банка ", fullDesc:"Ручная установка баланса игроку. Тип: food, wood, stone, ore, gold.<br><br><strong>Внимание:</strong> Если в никнейме есть пробел, замените его на нижнее подчеркивание (_). Пример: Player_1. Если два пробела, то два подчеркивания.", examples:"!setbal Player food 1M<br>!setbal Player_1 food 1M"})'><svg width="12" height="12"><use href="#icon-info"/></svg> Инфо</button></div></li>
-<li><span class="command">!setacc [ник]</span><span class="short-desc">Передать весь свой баланс</span><div class="actions"><button onclick="copyToClipboard(this.parentNode.previousElementSibling.previousElementSibling)"><svg><use href="#icon-copy"/></svg> Копировать</button><button class="info-btn" onclick='showCommandInfo({command:"!setacc [ник]", access:"R4", fullDesc:"Зачисляет ваш текущий баланс на счёт указанного игрока.<br><br><strong>Внимание:</strong> Если в никнейме есть пробел, замените его на нижнее подчеркивание (_). Пример: Player_1. Если два пробела, то два подчеркивания.", examples:"!setacc Player<br>!setacc Player_1"})'><svg width="12" height="12"><use href="#icon-info"/></svg> Инфо</button></div></li>
-<li><span class="command">!transfer [ник] [тип] [кол-во]</span><span class="short-desc">Передать из своего баланса конкретную сумму и вид рсс</span><div class="actions"><button onclick="copyToClipboard(this.parentNode.previousElementSibling.previousElementSibling)"><svg><use href="#icon-copy"/></svg> Копировать</button><button class="info-btn" onclick='showCommandInfo({command:"!transfer [ник] [тип] [кол-во]", access:"R1+", fullDesc:"Переводит указанное количество ресурса с вашего баланса.<br><br><strong>Внимание:</strong> Если в никнейме есть пробел, замените его на нижнее подчеркивание (_). Пример: Player_1. Если два пробела, то два подчеркивания.", examples:"!transfer Player food 1M<br>!transfer Player_1 food 1M"})'><svg width="12" height="12"><use href="#icon-info"/></svg> Инфо</button></div></li>
-<li><span class="command">!setrsslimit [тип] [кол-во]</span><span class="short-desc">лимит</span><div class="actions"><button onclick="copyToClipboard(this.parentNode.previousElementSibling.previousElementSibling)"><svg><use href="#icon-copy"/></svg> Копировать</button><button class="info-btn" onclick='showCommandInfo({command:"!setrsslimit [тип] [кол-во]", access:"Админов банка ", fullDesc:"Устанавливает минимальный запас ресурса. Банк не опустится ниже.", examples:"!setrsslimit food 500k"})'><svg width="12" height="12"><use href="#icon-info"/></svg> Инфо</button></div></li>
+<li>
+    <div class="command-line">
+        <span class="command">!bal</span>
+        <button class="copy-btn" onclick="copyToClipboard(this.previousElementSibling)">⧉ Копировать</button>
+    </div>
+    <div class="desc-line">
+        <span class="short-desc">🔹 ваш баланс</span>
+        <button class="info-btn" onclick='showCommandInfo({command:"!bal", access:"R1+", fullDesc:"Показывает ваш текущий баланс ресурсов в банке.<br><br><strong>Баланс</strong> — это ваш <strong>личный счёт</strong>, который вы можете использовать самостоятельно: забирать ресурсы или передавать их другим игрокам — <strong>без участия админа банка.", examples:"!bal"})'>⚠️ Подробнее</button>
+    </div>
+</li>
+<li>
+    <div class="command-line">
+        <span class="command">!adminbal ник</span>
+        <button class="copy-btn" onclick="copyToClipboard(this.previousElementSibling)">⧉ Копировать</button>
+    </div>
+    <div class="desc-line">
+        <span class="short-desc">🔹 баланс игрока</span>
+        <button class="info-btn" onclick='showCommandInfo({command:"!adminbal ник", access:"R4", fullDesc:"Проверяет баланс ресурсов конкретного игрока.<br><br><strong>Добавьте chat</strong> — вывод в чат.", examples:"!adminbal Player_213<br>!adminbal Player_213 chat"})'>⚠️ Подробнее</button>
+    </div>
+</li>
+<li>
+    <div class="command-line">
+        <span class="command">!adminbal</span>
+        <button class="copy-btn" onclick="copyToClipboard(this.previousElementSibling)">⧉ Копировать</button>
+    </div>
+    <div class="desc-line">
+        <span class="short-desc">🔹 общий баланс</span>
+        <button class="info-btn" onclick='showCommandInfo({command:"!adminbal", access:"R4", fullDesc:"Показывает общий баланс всех ресурсов банка.<br><br><strong>Добавьте chat</strong> — вывод в чат.", examples:"!adminbal<br>!adminbal chat"})'>⚠️ Подробнее</button>
+    </div>
+</li>
+<li>
+    <div class="command-line">
+        <span class="command">!adminbag</span>
+        <button class="copy-btn" onclick="copyToClipboard(this.previousElementSibling)">⧉ Копировать</button>
+    </div>
+    <div class="desc-line">
+        <span class="short-desc">🔹 сумка банка</span>
+        <button class="info-btn" onclick='showCommandInfo({command:"!adminbag", access:"R4", fullDesc:"Показывает ресурсы, находящиеся в сумке банка (не в балансе).<br><br><strong>Добавьте chat</strong> — вывод в чат.", examples:"!adminbag<br>!adminbag chat"})'>⚠️ Подробнее</button>
+    </div>
+</li>
+<li>
+    <div class="command-line">
+        <span class="command">!setbal ник тип кол-во</span>
+        <button class="copy-btn" onclick="copyToClipboard(this.previousElementSibling)">⧉ Копировать</button>
+    </div>
+    <div class="desc-line">
+        <span class="short-desc">🔹 Установить баланс игроку</span>
+        <button class="info-btn" onclick='showCommandInfo({command:"!setbal ник тип кол-во", access:"Админов банка", fullDesc:"Ручная установка баланса игроку. Тип: food, wood, stone, ore, gold.", examples:"!setbal Player_213 food 1M"})'>⚠️ Подробнее</button>
+    </div>
+</li>
+<li>
+    <div class="command-line">
+        <span class="command">!setacc ник</span>
+        <button class="copy-btn" onclick="copyToClipboard(this.previousElementSibling)">⧉ Копировать</button>
+    </div>
+    <div class="desc-line">
+        <span class="short-desc">🔹 Передать весь свой баланс</span>
+        <button class="info-btn" onclick='showCommandInfo({command:"!setacc ник", access:"R4", fullDesc:"Зачисляет ваш текущий баланс на счёт указанного игрока.", examples:"!setacc Player_213"})'>⚠️ Подробнее</button>
+    </div>
+</li>
+<li>
+    <div class="command-line">
+        <span class="command">!transfer ник тип кол-во</span>
+        <button class="copy-btn" onclick="copyToClipboard(this.previousElementSibling)">⧉ Копировать</button>
+    </div>
+    <div class="desc-line">
+        <span class="short-desc">🔹 Передать из своего баланса конкретную сумму и вид рсс.</span>
+        <button class="info-btn" onclick='showCommandInfo({command:"!transfer ник тип кол-во", access:"R1+", fullDesc:"Переводит указанное количество ресурса с вашего баланса.", examples:"!transfer Player_213 food 1M"})'>⚠️ Подробнее</button>
+    </div>
+</li>
+<li>
+    <div class="command-line">
+        <span class="command">!setrsslimit тип кол-во</span>
+        <button class="copy-btn" onclick="copyToClipboard(this.previousElementSibling)">⧉ Копировать</button>
+    </div>
+    <div class="desc-line">
+        <span class="short-desc">🔹 лимит</span>
+        <button class="info-btn" onclick='showCommandInfo({command:"!setrsslimit тип кол-во", access:"Админов банка", fullDesc:"Устанавливает минимальный запас ресурса. Банк не опустится ниже.", examples:"!setrsslimit food 500k"})'>⚠️ Подробнее</button>
+    </div>
+</li>
 </ul>
 
 <!-- 5. РЕСУРСЫ -->
 <h2>🌾 Ресурсы поставка</h2>
 <ul>
-<li><span class="command">!adminrss F S W O G ник</span><span class="short-desc">выдать все (админ)</span><div class="actions"><button onclick="copyToClipboard(this.parentNode.previousElementSibling.previousElementSibling)"><svg><use href="#icon-copy"/></svg> Копировать</button><button class="info-btn" onclick='showCommandInfo({command:"!adminrss F S W O G ник", access:"R4", fullDesc:"Выдаёт все типы ресурсов игроку <strong>от имени администратора</strong> — <strong>без вычета с личного баланса</strong>.<br><br>Порядок: еда, камень, дерево, руда, золото. 0 = пропустить тип.<br><br><strong>Только R4+</strong><br><br><strong>Внимание:</strong> Если в никнейме есть пробел, замените его на нижнее подчеркивание (_). Пример: Player_1. Если два пробела, то два подчеркивания.", examples:"!adminrss 10M 10M 10M 0 10M Player<br>!adminrss 10M 10M 10M 0 10M Player_1"})'><svg width="12" height="12"><use href="#icon-info"/></svg> Инфо</button></div></li>
-<li><span class="command">!adminfood ник кол-во</span><span class="short-desc">выдать ресурс (админ)</span><div class="actions"><button onclick="copyToClipboard(this.parentNode.previousElementSibling.previousElementSibling)"><svg><use href="#icon-copy"/></svg> Копировать</button><button class="info-btn" onclick='showCommandInfo({command:"!adminfood ник кол-во", access:"R4", fullDesc:"Выдаёт указанный ресурс игроку <strong>от имени администратора</strong> — <strong>без списания с личного баланса</strong>.<br><br>Если нужен другой тип — пиши вместо <code>food</code>: <code>stone</code>, <code>wood</code>, <code>ore</code>, <code>gold</code>.<br><br><strong>Пример:</strong> !adminstone Player 10m — выдаст 10 млн камня от банка.<br><br><strong>Внимание:</strong> Если в никнейме есть пробел, замените его на нижнее подчеркивание (_). Пример: Player_1. Если два пробела, то два подчеркивания.", examples:"!adminfood Player 10m<br>!adminstone Player 5m<br>!adminwood Player 8m<br>!adminore Player 7m<br>!admingold Player 3m<br>!adminfood Player_1 10m"})'><svg width="12" height="12"><use href="#icon-info"/></svg> Инфо</button></div></li>
-<li><span class="command">!food 5m</span><span class="short-desc">выдать с баланса</span><div class="actions"><button onclick="copyToClipboard(this.parentNode.previousElementSibling.previousElementSibling)"><svg><use href="#icon-copy"/></svg> Копировать</button><button class="info-btn" onclick='showCommandInfo({command:"!food 5m", access:"R1+", fullDesc:"Выдаёт указанное количество ресурса <strong>с вашего личного баланса</strong>.<br><br>Работает, если у вас достаточно ресурса на счету.<br><br>Аналогично: !wood, !stone, !ore, !gold.<br><br><strong>Внимание:</strong> Это не админ-выдача — списывается с вас!", examples:"!food 5m<br>!stone 5m<br>!wood 5m<br>!ore 5m<br>!gold 5m"})'><svg width="12" height="12"><use href="#icon-info"/></svg> Инфо</button></div></li>
-<li><span class="command">!rss F S W O G</span><span class="short-desc">все ресурсы с баланса</span><div class="actions"><button onclick="copyToClipboard(this.parentNode.previousElementSibling.previousElementSibling)"><svg><use href="#icon-copy"/></svg> Копировать</button><button class="info-btn" onclick='showCommandInfo({command:"!rss F S W O G", access:"R1+", fullDesc:"Выдаёт все типы ресурсов <strong>с вашего личного баланса</strong>.<br><br>Порядок: еда, камень, дерево, руда, золото.<br>0 = пропустить тип.<br><br><strong>Требуется:</strong> достаточно ресурсов на вашем балансе.", examples:"!rss 10m 0 10m 10m 10m"})'><svg width="12" height="12"><use href="#icon-info"/></svg> Инфо</button></div></li>
-<li><span class="command">!donate тип ник кол-во</span><span class="short-desc">пожертвовать</span><div class="actions"><button onclick="copyToClipboard(this.parentNode.previousElementSibling.previousElementSibling)"><svg><use href="#icon-copy"/></svg> Копировать</button><button class="info-btn" onclick='showCommandInfo({command:"!donate тип ник кол-во", access:"R1+", fullDesc:"Пожертвовать ресурсы указанному игроку.<br><br><strong>Внимание:</strong> Если в никнейме есть пробел, замените его на нижнее подчеркивание (_). Пример: Player_1. Если два пробела, то два подчеркивания.", examples:"!donate food Player 5m<br>!donate food Player_1 5m"})'><svg width="12" height="12"><use href="#icon-info"/></svg> Инфо</button></div></li>
-<li><span class="command">!abort</span><span class="short-desc">отменить</span><div class="actions"><button onclick="copyToClipboard(this.parentNode.previousElementSibling.previousElementSibling)"><svg><use href="#icon-copy"/></svg> Копировать</button><button class="info-btn" onclick='showCommandInfo({command:"!abort", access:"R4", fullDesc:"Отменяет все текущие поставки ресурсов.", examples:"!abort"})'><svg width="12" height="12"><use href="#icon-info"/></svg> Инфо</button></div></li>
+    <li>
+        <div class="command-line">
+            <span class="command">!adminrss F S W O G ник</span>
+            <button class="copy-btn" onclick="copyToClipboard(this.previousElementSibling)">⧉ Копировать</button>
+        </div>
+        <div class="desc-line">
+            <span class="short-desc">🔹 выдать все (админ)</span>
+            <button class="info-btn" onclick='showCommandInfo({command:"!adminrss F S W O G ник", access:"R4", fullDesc:"Выдаёт все типы ресурсов игроку <strong>от имени администратора</strong> — <strong>без вычета с личного баланса</strong>.<br><br>Порядок: еда, камень, дерево, руда, золото. 0 = пропустить тип.<br><br><strong>Только R4+</strong><br><br><strong>Внимание:</strong> Если в никнейме есть пробел, замените его на нижнее подчеркивание (_). Пример: Player_213_1. Если два пробела, то два подчеркивания.", examples:"!adminrss 10M 10M 10M 0 10M Player_213"})'>⚠️ Подробнее</button>
+        </div>
+    </li>
+    <li>
+        <div class="command-line">
+            <span class="command">!adminfood ник кол-во</span>
+            <button class="copy-btn" onclick="copyToClipboard(this.previousElementSibling)">⧉ Копировать</button>
+        </div>
+        <div class="desc-line">
+            <span class="short-desc">🔹 выдать ресурс (админ)</span>
+            <button class="info-btn" onclick='showCommandInfo({command:"!adminfood ник кол-во", access:"R4", fullDesc:"Выдаёт указанный ресурс игроку <strong>от имени администратора</strong> — <strong>без списания с личного баланса</strong>.<br><br>Если нужен другой тип — пиши вместо <code>food</code>: <code>stone</code>, <code>wood</code>, <code>ore</code>, <code>gold</code>.<br><br><strong>Пример:</strong> !adminstone Player_213 10m — выдаст 10 млн камня от банка.<br><br><strong>Внимание:</strong> Если в никнейме есть пробел, замените его на нижнее подчеркивание (_). Пример: Player_213_1. Если два пробела, то два подчеркивания.", examples:"!adminfood Player_213 10m<br>!adminstone Player_213 5m<br>!adminwood Player_213 8m<br>!adminore Player_213 7m<br>!admingold Player_213 3m"})'>⚠️ Подробнее</button>
+        </div>
+    </li>
+    <li>
+        <div class="command-line">
+            <span class="command">!food 5m</span>
+            <button class="copy-btn" onclick="copyToClipboard(this.previousElementSibling)">⧉ Копировать</button>
+        </div>
+        <div class="desc-line">
+            <span class="short-desc">🔹 выдать с баланса</span>
+            <button class="info-btn" onclick='showCommandInfo({command:"!food 5m", access:"R1+", fullDesc:"Выдаёт указанное количество ресурса <strong>с вашего личного баланса</strong>.<br><br>Работает, если у вас достаточно ресурса на счету.<br><br>Аналогично: !wood, !stone, !ore, !gold.<br><br><strong>Внимание:</strong> Это не админ-выдача — списывается с вас!", examples:"!food 5m<br>!stone 5m<br>!wood 5m<br>!ore 5m<br>!gold 5m"})'>⚠️ Подробнее</button>
+        </div>
+    </li>
+    <li>
+        <div class="command-line">
+            <span class="command">!rss F S W O G</span>
+            <button class="copy-btn" onclick="copyToClipboard(this.previousElementSibling)">⧉ Копировать</button>
+        </div>
+        <div class="desc-line">
+            <span class="short-desc">🔹 все ресурсы с баланса</span>
+            <button class="info-btn" onclick='showCommandInfo({command:"!rss F S W O G", access:"R1+", fullDesc:"Выдаёт все типы ресурсов <strong>с вашего личного баланса</strong>.<br><br>Порядок: еда, камень, дерево, руда, золото.<br>0 = пропустить тип.<br><br><strong>Требуется:</strong> достаточно ресурсов на вашем балансе.", examples:"!rss 10m 0 10m 10m 10m"})'>⚠️ Подробнее</button>
+        </div>
+    </li>
+    <li>
+        <div class="command-line">
+            <span class="command">!donate тип ник кол-во</span>
+            <button class="copy-btn" onclick="copyToClipboard(this.previousElementSibling)">⧉ Копировать</button>
+        </div>
+        <div class="desc-line">
+            <span class="short-desc">🔹 пожертвовать</span>
+            <button class="info-btn" onclick='showCommandInfo({command:"!donate тип ник кол-во", access:"R1+", fullDesc:"Пожертвовать ресурсы указанному игроку.<br><br><strong>Внимание:</strong> Если в никнейме есть пробел, замените его на нижнее подчеркивание (_). Пример: Player_213_1. Если два пробела, то два подчеркивания.", examples:"!donate food Player_213 5m"})'>⚠️ Подробнее</button>
+        </div>
+    </li>
+    <li>
+        <div class="command-line">
+            <span class="command">!abort</span>
+            <button class="copy-btn" onclick="copyToClipboard(this.previousElementSibling)">⧉ Копировать</button>
+        </div>
+        <div class="desc-line">
+            <span class="short-desc">🔹 отменить</span>
+            <button class="info-btn" onclick='showCommandInfo({command:"!abort", access:"R4", fullDesc:"Отменяет все текущие поставки ресурсов.", examples:"!abort"})'>⚠️ Подробнее</button>
+        </div>
+    </li>
 </ul>
 
 <!-- 6. ПОИСК НА КАРТЕ -->
 <h2>🔍 Поиск на карте</h2>
 <ul>
-<li><span class="command">!findtile [тип] [уровень]</span><span class="short-desc">плитка</span><div class="actions"><button onclick="copyToClipboard(this.parentNode.previousElementSibling.previousElementSibling)"><svg><use href="#icon-copy"/></svg> Копировать</button><button class="info-btn" onclick='showCommandInfo({command:"!findtile [тип] [уровень]", access:"Админов банка ", fullDesc:"Ищет плитку указанного типа и уровня вокруг банка. Тип: food, wood, stone, ore, gold.<br><br><strong>Добавьте chat</strong> — вывод в чат.", examples:"!findtile food 4<br>!findtile food 4 chat"})'><svg width="12" height="12"><use href="#icon-info"/></svg> Инфо</button></div></li>
-<li><span class="command">!findtile any [уровень]</span><span class="short-desc">любая</span><div class="actions"><button onclick="copyToClipboard(this.parentNode.previousElementSibling.previousElementSibling)"><svg><use href="#icon-copy"/></svg> Копировать</button><button class="info-btn" onclick='showCommandInfo({command:"!findtile any [уровень]", access:"Админов банка ", fullDesc:"Ищет любую плитку указанного уровня вокруг банка.<br><br><strong>Добавьте chat</strong> — вывод в чат.", examples:"!findtile any 4<br>!findtile any 4 chat"})'><svg width="12" height="12"><use href="#icon-info"/></svg> Инфо</button></div></li>
-<li><span class="command">!findtilelocal [тип] [уровень]</span><span class="short-desc">у замка</span><div class="actions"><button onclick="copyToClipboard(this.parentNode.previousElementSibling.previousElementSibling)"><svg><use href="#icon-copy"/></svg> Копировать</button><button class="info-btn" onclick='showCommandInfo({command:"!findtilelocal [тип] [уровень]", access:"Админов банка ", fullDesc:"Ищет плитку вокруг вашего замка.<br><br><strong>Добавьте chat</strong> — вывод в чат.", examples:"!findtilelocal food 4<br>!findtilelocal food 4 chat"})'><svg width="12" height="12"><use href="#icon-info"/></svg> Инфо</button></div></li>
-<li><span class="command">!findmonster [монстр] [уровень]</span><span class="short-desc">монстр</span><div class="actions"><button onclick="copyToClipboard(this.parentNode.previousElementSibling.previousElementSibling)"><svg><use href="#icon-copy"/></svg> Копировать</button><button class="info-btn" onclick='showCommandInfo({command:"!findmonster [монстр] [уровень]", access:"Админов банка ", fullDesc:"Ищет монстра указанного типа и уровня вокруг банка.<br><br><strong>Добавьте chat</strong> — вывод в чат.", examples:"!findmonster Титан 5<br>!findmonster Титан 5 chat"})'><svg width="12" height="12"><use href="#icon-info"/></svg> Инфо</button></div></li>
-<li><span class="command">!findmonster any [уровень]</span><span class="short-desc">любой</span><div class="actions"><button onclick="copyToClipboard(this.parentNode.previousElementSibling.previousElementSibling)"><svg><use href="#icon-copy"/></svg> Копировать</button><button class="info-btn" onclick='showCommandInfo({command:"!findmonster any [уровень]", access:"Админов банка ", fullDesc:"Ищет любого монстра указанного уровня вокруг банка.<br><br><strong>Добавьте chat</strong> — вывод в чат.", examples:"!findmonster any 25<br>!findmonster any 25 chat"})'><svg width="12" height="12"><use href="#icon-info"/></svg> Инфо</button></div></li>
-<li><span class="command">!findmonsterlocal [монстр] [уровень]</span><span class="short-desc">у замка</span><div class="actions"><button onclick="copyToClipboard(this.parentNode.previousElementSibling.previousElementSibling)"><svg><use href="#icon-copy"/></svg> Копировать</button><button class="info-btn" onclick='showCommandInfo({command:"!findmonsterlocal [монстр] [уровень]", access:"Админов банка ", fullDesc:"Ищет монстра вокруг вашего замка.<br><br><strong>Добавьте chat</strong> — вывод в чат.", examples:"!findmonsterlocal Титан 5<br>!findmonsterlocal Титан 5 chat"})'><svg width="12" height="12"><use href="#icon-info"/></svg> Инфо</button></div></li>
-<li><span class="command">!finddarknest [уровень]</span><span class="short-desc">Бастион хаоса</span><div class="actions"><button onclick="copyToClipboard(this.parentNode.previousElementSibling.previousElementSibling)"><svg><use href="#icon-copy"/></svg> Копировать</button><button class="info-btn" onclick='showCommandInfo({command:"!finddarknest [уровень]", access:"Админов банка ", fullDesc:"Ищет Бастион хаоса указанного уровня вокруг банка.<br><br><strong>Добавьте chat</strong> — вывод в чат.", examples:"!finddarknest 3<br>!finddarknest 3 chat"})'><svg width="12" height="12"><use href="#icon-info"/></svg> Инфо</button></div></li>
-<li><span class="command">!findnestlocal [уровень]</span><span class="short-desc">у замка</span><div class="actions"><button onclick="copyToClipboard(this.parentNode.previousElementSibling.previousElementSibling)"><svg><use href="#icon-copy"/></svg> Копировать</button><button class="info-btn" onclick='showCommandInfo({command:"!findnestlocal [уровень]", access:"Админов банка ", fullDesc:"Ищет Бастион хаоса вокруг вашего замка.<br><br><strong>Добавьте chat</strong> — вывод в чат.", examples:"!findnestlocal 3<br>!findnestlocal 3 chat"})'><svg width="12" height="12"><use href="#icon-info"/></svg> Инфо</button></div></li>
+<li>
+    <div class="command-line">
+        <span class="command">!findtile тип уровень</span>
+        <button class="copy-btn" onclick="copyToClipboard(this.previousElementSibling)">⧉ Копировать</button>
+    </div>
+    <div class="desc-line">
+        <span class="short-desc">🔹 плитки у банка</span>
+        <button class="info-btn" onclick='showCommandInfo({command:"!findtile тип уровень", access:"Админов банка", fullDesc:"Ищет плитку указанного типа и уровня вокруг банка. Тип: food, wood, stone, ore, gold.<br><br><strong>Добавьте chat</strong> — вывод в чат.", examples:"!findtile food 4<br>!findtile food 4 chat"})'>⚠️ Подробнее</button>
+    </div>
+</li>
+<li>
+    <div class="command-line">
+        <span class="command">!findtile any уровень</span>
+        <button class="copy-btn" onclick="copyToClipboard(this.previousElementSibling)">⧉ Копировать</button>
+    </div>
+    <div class="desc-line">
+        <span class="short-desc">🔹 любой вид плиток у банка</span>
+        <button class="info-btn" onclick='showCommandInfo({command:"!findtile any уровень", access:"Админов банка", fullDesc:"Ищет любую плитку указанного уровня вокруг банка.<br><br><strong>Добавьте chat</strong> — вывод в чат.", examples:"!findtile any 4<br>!findtile any 4 chat"})'>⚠️ Подробнее</button>
+    </div>
+</li>
+<li>
+    <div class="command-line">
+        <span class="command">!findtilelocal тип уровень</span>
+        <button class="copy-btn" onclick="copyToClipboard(this.previousElementSibling)">⧉ Копировать</button>
+    </div>
+    <div class="desc-line">
+        <span class="short-desc">🔹 плитки у замка</span>
+        <button class="info-btn" onclick='showCommandInfo({command:"!findtilelocal тип уровень", access:"Админов банка", fullDesc:"Ищет плитку вокруг вашего замка.<br><br><strong>Добавьте chat</strong> — вывод в чат.", examples:"!findtilelocal food 4<br>!findtilelocal food 4 chat"})'>⚠️ Подробнее</button>
+    </div>
+</li>
+<li>
+    <div class="command-line">
+        <span class="command">!findmonster монстр уровень</span>
+        <button class="copy-btn" onclick="copyToClipboard(this.previousElementSibling)">⧉ Копировать</button>
+    </div>
+    <div class="desc-line">
+        <span class="short-desc">🔹 монстр у банка</span>
+        <button class="info-btn" onclick='showCommandInfo({command:"!findmonster монстр уровень", access:"Админов банка", fullDesc:"Ищет монстра указанного типа и уровня вокруг банка.<br><br><strong>Добавьте chat</strong> — вывод в чат.", examples:"!findmonster Титан 5<br>!findmonster Титан 5 chat"})'>⚠️ Подробнее</button>
+    </div>
+</li>
+<li>
+    <div class="command-line">
+        <span class="command">!findmonster any уровень</span>
+        <button class="copy-btn" onclick="copyToClipboard(this.previousElementSibling)">⧉ Копировать</button>
+    </div>
+    <div class="desc-line">
+        <span class="short-desc">🔹 любой монстр у банка</span>
+        <button class="info-btn" onclick='showCommandInfo({command:"!findmonster any уровень", access:"Админов банка", fullDesc:"Ищет любого монстра указанного уровня вокруг банка.<br><br><strong>Добавьте chat</strong> — вывод в чат.", examples:"!findmonster any 25<br>!findmonster any 25 chat"})'>⚠️ Подробнее</button>
+    </div>
+</li>
+<li>
+    <div class="command-line">
+        <span class="command">!findmonsterlocal монстр уровень</span>
+        <button class="copy-btn" onclick="copyToClipboard(this.previousElementSibling)">⧉ Копировать</button>
+    </div>
+    <div class="desc-line">
+        <span class="short-desc">🔹 монстр у замка</span>
+        <button class="info-btn" onclick='showCommandInfo({command:"!findmonsterlocal монстр уровень", access:"Админов банка", fullDesc:"Ищет монстра вокруг вашего замка.<br><br><strong>Добавьте chat</strong> — вывод в чат.", examples:"!findmonsterlocal Титан 5<br>!findmonsterlocal Титан 5 chat"})'>⚠️ Подробнее</button>
+    </div>
+</li>
+<li>
+    <div class="command-line">
+        <span class="command">!finddarknest уровень</span>
+        <button class="copy-btn" onclick="copyToClipboard(this.previousElementSibling)">⧉ Копировать</button>
+    </div>
+    <div class="desc-line">
+        <span class="short-desc">🔹 Бастион хаоса у банка</span>
+        <button class="info-btn" onclick='showCommandInfo({command:"!finddarknest уровень", access:"Админов банка", fullDesc:"Ищет Бастион хаоса указанного уровня вокруг банка.<br><br><strong>Добавьте chat</strong> — вывод в чат.", examples:"!finddarknest 3<br>!finddarknest 3 chat"})'>⚠️ Подробнее</button>
+    </div>
+</li>
+<li>
+    <div class="command-line">
+        <span class="command">!findnestlocal уровень</span>
+        <button class="copy-btn" onclick="copyToClipboard(this.previousElementSibling)">⧉ Копировать</button>
+    </div>
+    <div class="desc-line">
+        <span class="short-desc">🔹 Бастион хаоса у замка</span>
+        <button class="info-btn" onclick='showCommandInfo({command:"!findnestlocal уровень", access:"Админов банка", fullDesc:"Ищет Бастион хаоса вокруг вашего замка.<br><br><strong>Добавьте chat</strong> — вывод в чат.", examples:"!findnestlocal 3<br>!findnestlocal 3 chat"})'>⚠️ Подробнее</button>
+    </div>
+</li>
 </ul>
 
-<!-- 7. ЗАЩИТА -->
+<!-- 7. ЗАЩИТА И ВОЙСКА -->
 <h2>🛡️ Защита и войска</h2>
 <ul>
-<li><span class="command">!shield</span><span class="short-desc">статус</span><div class="actions"><button onclick="copyToClipboard(this.parentNode.previousElementSibling.previousElementSibling)"><svg><use href="#icon-copy"/></svg> Копировать</button><button class="info-btn" onclick='showCommandInfo({command:"!shield", access:"R4", fullDesc:"Показывает время окончания текущего щита.", examples:"!shield"})'><svg width="12" height="12"><use href="#icon-info"/></svg> Инфо</button></div></li>
-<li><span class="command">!shield deploy</span><span class="short-desc">активировать</span><div class="actions"><button onclick="copyToClipboard(this.parentNode.previousElementSibling.previousElementSibling)"><svg><use href="#icon-copy"/></svg> Копировать</button><button class="info-btn" onclick='showCommandInfo({command:"!shield deploy", access:"R4", fullDesc:"Активирует самый длительный доступный щит из сумки.", examples:"!shield deploy"})'><svg width="12" height="12"><use href="#icon-info"/></svg> Инфо</button></div></li>
-<li><span class="command">!camp [x] [y]</span><span class="short-desc">лагерь</span><div class="actions"><button onclick="copyToClipboard(this.parentNode.previousElementSibling.previousElementSibling)"><svg><use href="#icon-copy"/></svg> Копировать</button><button class="info-btn" onclick='showCommandInfo({command:"!camp [x] [y]", access:"Админов банка ", fullDesc:"Отправляет лагерь без лидера на указанные координаты.", examples:"!camp 150 250"})'><svg width="12" height="12"><use href="#icon-info"/></svg> Инфо</button></div></li>
-<li><span class="command">!campleader [x] [y]</span><span class="short-desc">с лидером</span><div class="actions"><button onclick="copyToClipboard(this.parentNode.previousElementSibling.previousElementSibling)"><svg><use href="#icon-copy"/></svg> Копировать</button><button class="info-btn" onclick='showCommandInfo({command:"!campleader [x] [y]", access:"Админов банка ", fullDesc:"Отправляет лагерь с лидером на указанные координаты.", examples:"!campleader 150 250"})'><svg width="12" height="12"><use href="#icon-info"/></svg> Инфо</button></div></li>
-<li><span class="command">!payransom</span><span class="short-desc">выкуп</span><div class="actions"><button onclick="copyToClipboard(this.parentNode.previousElementSibling.previousElementSibling)"><svg><use href="#icon-copy"/></svg> Копировать</button><button class="info-btn" onclick='showCommandInfo({command:"!payransom", access:"Админов банка ", fullDesc:"Оплачивает выкуп за лидера, если он находится в плену.", examples:"!payransom"})'><svg width="12" height="12"><use href="#icon-info"/></svg> Инфо</button></div></li>
+<li>
+    <div class="command-line">
+        <span class="command">!shield</span>
+        <button class="copy-btn" onclick="copyToClipboard(this.previousElementSibling)">⧉ Копировать</button>
+    </div>
+    <div class="desc-line">
+        <span class="short-desc">🔹 статус</span>
+        <button class="info-btn" onclick='showCommandInfo({command:"!shield", access:"R4", fullDesc:"Показывает время окончания текущего щита.", examples:"!shield"})'>⚠️ Подробнее</button>
+    </div>
+</li>
+<li>
+    <div class="command-line">
+        <span class="command">!shield deploy</span>
+        <button class="copy-btn" onclick="copyToClipboard(this.previousElementSibling)">⧉ Копировать</button>
+    </div>
+    <div class="desc-line">
+        <span class="short-desc">🔹 активировать</span>
+        <button class="info-btn" onclick='showCommandInfo({command:"!shield deploy", access:"R4", fullDesc:"Активирует самый длительный доступный щит из сумки.", examples:"!shield deploy"})'>⚠️ Подробнее</button>
+    </div>
+</li>
+<li>
+    <div class="command-line">
+        <span class="command">!camp x y</span>
+        <button class="copy-btn" onclick="copyToClipboard(this.previousElementSibling)">⧉ Копировать</button>
+    </div>
+    <div class="desc-line">
+        <span class="short-desc">🔹 лагерь</span>
+        <button class="info-btn" onclick='showCommandInfo({command:"!camp x y", access:"Админов банка", fullDesc:"Отправляет лагерь без лидера на указанные координаты.", examples:"!camp 150 250"})'>⚠️ Подробнее</button>
+    </div>
+</li>
+<li>
+    <div class="command-line">
+        <span class="command">!campleader x y</span>
+        <button class="copy-btn" onclick="copyToClipboard(this.previousElementSibling)">⧉ Копировать</button>
+    </div>
+    <div class="desc-line">
+        <span class="short-desc">🔹 с лидером</span>
+        <button class="info-btn" onclick='showCommandInfo({command:"!campleader x y", access:"Админов банка", fullDesc:"Отправляет лагерь с лидером на указанные координаты.", examples:"!campleader 150 250"})'>⚠️ Подробнее</button>
+    </div>
+</li>
+<li>
+    <div class="command-line">
+        <span class="command">!payransom</span>
+        <button class="copy-btn" onclick="copyToClipboard(this.previousElementSibling)">⧉ Копировать</button>
+    </div>
+    <div class="desc-line">
+        <span class="short-desc">🔹 выкуп</span>
+        <button class="info-btn" onclick='showCommandInfo({command:"!payransom", access:"Админов банка", fullDesc:"Оплачивает выкуп за лидера, если он находится в плену.", examples:"!payransom"})'>⚠️ Подробнее</button>
+    </div>
+</li>
 </ul>
 
 <!-- 8. ПРОЧЕЕ -->
 <h2>🔄 Прочее</h2>
 <ul>
-<li><span class="command">!quest</span><span class="short-desc">фестиваль</span><div class="actions"><button onclick="copyToClipboard(this.parentNode.previousElementSibling.previousElementSibling)"><svg><use href="#icon-copy"/></svg> Копировать</button><button class="info-btn" onclick='showCommandInfo({command:"!quest", access:"R1+", fullDesc:"Показывает статус Поручения гильдии и текущие задания.", examples:"!quest"})'><svg width="12" height="12"><use href="#icon-info"/></svg> Инфо</button></div></li>
-<li><span class="command">!ess</span><span class="short-desc">лаборатория</span><div class="actions"><button onclick="copyToClipboard(this.parentNode.previousElementSibling.previousElementSibling)"><svg><use href="#icon-copy"/></svg> Копировать</button><button class="info-btn" onclick='showCommandInfo({command:"!ess", access:"Админов банка ", fullDesc:"Отправляет письмо с текущим состоянием лаборатории (эссенции).", examples:"!ess"})'><svg width="12" height="12"><use href="#icon-info"/></svg> Инфо</button></div></li>
-<li><span class="command">!recall all</span><span class="short-desc">отозвать</span><div class="actions"><button onclick="copyToClipboard(this.parentNode.previousElementSibling.previousElementSibling)"><svg><use href="#icon-copy"/></svg> Копировать</button><button class="info-btn" onclick='showCommandInfo({command:"!recall all", access:"Админов банка ", fullDesc:"Отзывает все войска банка (не включая марширующие).", examples:"!recall all"})'><svg width="12" height="12"><use href="#icon-info"/></svg> Инфо</button></div></li>
-<li><span class="command">!buildspam [кол-во] [скорость]</span><span class="short-desc">спам стройкой</span><div class="actions"><button onclick="copyToClipboard(this.parentNode.previousElementSibling.previousElementSibling)"><svg><use href="#icon-copy"/></svg> Копировать</button><button class="info-btn" onclick='showCommandInfo({command:"!buildspam [кол-во] [скорость]", access:"R4", fullDesc:"Запускает спам строительством для Поручения гильдии или гильдийных монет.", examples:"!buildspam 10 5"})'><svg width="12" height="12"><use href="#icon-info"/></svg> Инфо</button></div></li>
-<li><span class="command">!buildspam stop</span><span class="short-desc">остановить</span><div class="actions"><button onclick="copyToClipboard(this.parentNode.previousElementSibling.previousElementSibling)"><svg><use href="#icon-copy"/></svg> Копировать</button><button class="info-btn" onclick='showCommandInfo({command:"!buildspam stop", access:"R4", fullDesc:"Останавливает спам строительством.", examples:"!buildspam stop"})'><svg width="12" height="12"><use href="#icon-info"/></svg> Инфо</button></div></li>
-<li><span class="command">!setgather [on/off]</span><span class="short-desc">автосбор</span><div class="actions"><button onclick="copyToClipboard(this.parentNode.previousElementSibling.previousElementSibling)"><svg><use href="#icon-copy"/></svg> Копировать</button><button class="info-btn" onclick='showCommandInfo({command:"!setgather [on/off]", access:"R4", fullDesc:"Включает или выключает автоматический сбор ресурсов. (не работает в Царстве миражей)", examples:"!setgather on<br>!setgather off"})'><svg width="12" height="12"><use href="#icon-info"/></svg> Инфо</button></div></li>
-<li><span class="command">!snowbeast</span><span class="short-desc">вьюжник</span><div class="actions"><button onclick="copyToClipboard(this.parentNode.previousElementSibling.previousElementSibling)"><svg><use href="#icon-copy"/></svg> Копировать</button><button class="info-btn" onclick='showCommandInfo({command:"!snowbeast", access:"R4", fullDesc:"Активирует навык вьюжника (буст производства ресурсов).", examples:"!snowbeast"})'><svg width="12" height="12"><use href="#icon-info"/></svg> Инфо</button></div></li>
-<li><span class="command">!gryphon</span><span class="short-desc">грифон</span><div class="actions"><button onclick="copyToClipboard(this.parentNode.previousElementSibling.previousElementSibling)"><svg><use href="#icon-copy"/></svg> Копировать</button><button class="info-btn" onclick='showCommandInfo({command:"!gryphon", access:"R4", fullDesc:"Активирует навык грифона (ускорение маршей).", examples:"!gryphon"})'><svg width="12" height="12"><use href="#icon-info"/></svg> Инфо</button></div></li>
-<li><span class="command">!stopp [секунды]</span><span class="short-desc">пауза</span><div class="actions"><button onclick="copyToClipboard(this.parentNode.previousElementSibling.previousElementSibling)"><svg><use href="#icon-copy"/></svg> Копировать</button><button class="info-btn" onclick='showCommandInfo({command:"!stopp [секунды]", access:"Админов банка ", fullDesc:"Останавливает все действия банка на указанное время.", examples:"!stopp 300"})'><svg width="12" height="12"><use href="#icon-info"/></svg> Инфо</button></div></li>
-<li><span class="command">!reloadacc</span><span class="short-desc">перезагрузка</span><div class="actions"><button onclick="copyToClipboard(this.parentNode.previousElementSibling.previousElementSibling)"><svg><use href="#icon-copy"/></svg> Копировать</button><button class="info-btn" onclick='showCommandInfo({command:"!reloadacc", access:"Админов банка ", fullDesc:"Принудительно перезапускает аккаунт банка.", examples:"!reloadacc"})'><svg width="12" height="12"><use href="#icon-info"/></svg> Инфо</button></div></li>
+<li>
+    <div class="command-line">
+        <span class="command">!stopp секунды</span>
+        <button class="copy-btn" onclick="copyToClipboard(this.previousElementSibling)">⧉ Копировать</button>
+    </div>
+    <div class="desc-line">
+        <span class="short-desc">🔹 пауза</span>
+        <button class="info-btn" onclick='showCommandInfo({command:"!stopp секунды", access:"Админов банка", fullDesc:"Останавливает бота на указанное время в секундах.<br><br><strong>PS:</strong><br><strong><u>⚠️Вовремя паузы бот не отвечает на команды.</u></strong><br>!reloadacc — Запускает бота но работает только в Telegram <br>", examples:"!stopp 300<br>!reloadacc"})'>⚠️ Подробнее</button>
+    </div>
+</li>
+<li>
+    <div class="command-line">
+        <span class="command">!reloadacc</span>
+        <button class="copy-btn" onclick="copyToClipboard(this.previousElementSibling)">⧉ Копировать</button>
+    </div>
+    <div class="desc-line">
+        <span class="short-desc">🔹 перезагрузка/запуск</span>
+        <button class="info-btn" onclick='showCommandInfo({command:"!reloadacc", access:"Админов банка", fullDesc:"Принудительно перезапускает аккаунт банка.", examples:"!reloadacc"})'>⚠️ Подробнее</button>
+    </div>
+</li>
+<li>
+    <div class="command-line">
+        <span class="command">!quest</span>
+        <button class="copy-btn" onclick="copyToClipboard(this.previousElementSibling)">⧉ Копировать</button>
+    </div>
+    <div class="desc-line">
+        <span class="short-desc">🔹 фестиваль</span>
+        <button class="info-btn" onclick='showCommandInfo({command:"!quest", access:"R1+", fullDesc:"Показывает статус Поручения гильдии и текущие задания.", examples:"!quest"})'>⚠️ Подробнее</button>
+    </div>
+</li>
+<li>
+    <div class="command-line">
+        <span class="command">!ess</span>
+        <button class="copy-btn" onclick="copyToClipboard(this.previousElementSibling)">⧉ Копировать</button>
+    </div>
+    <div class="desc-line">
+        <span class="short-desc">🔹 лаборатория</span>
+        <button class="info-btn" onclick='showCommandInfo({command:"!ess", access:"Админов банка", fullDesc:"Отправляет письмо с текущим состоянием лаборатории (эссенции).", examples:"!ess"})'>⚠️ Подробнее</button>
+    </div>
+</li>
+<li>
+    <div class="command-line">
+        <span class="command">!recall</span>
+        <button class="copy-btn" onclick="copyToClipboard(this.previousElementSibling)">⧉ Копировать</button>
+    </div>
+    <div class="desc-line">
+        <span class="short-desc">🔹 отозвать</span>
+        <button class="info-btn" onclick='showCommandInfo({command:"!recall", access:"Админов банка", fullDesc:"Отзывает все войска банка (не включая марширующие).", examples:"!recall"})'>⚠️ Подробнее</button>
+    </div>
+</li>
+<li>
+    <div class="command-line">
+        <span class="command">!buildspam кол-во скорость</span>
+        <button class="copy-btn" onclick="copyToClipboard(this.previousElementSibling)">⧉ Копировать</button>
+    </div>
+    <div class="desc-line">
+        <span class="short-desc">🔹 спам стройкой</span>
+        <button class="info-btn" onclick='showCommandInfo({command:"!buildspam кол-во скорость", access:"R4", fullDesc:"Запускает спам строительством для Поручения гильдии или гильдийных монет.", examples:"!buildspam 10 5"})'>⚠️ Подробнее</button>
+    </div>
+</li>
+<li>
+    <div class="command-line">
+        <span class="command">!buildspam stop</span>
+        <button class="copy-btn" onclick="copyToClipboard(this.previousElementSibling)">⧉ Копировать</button>
+    </div>
+    <div class="desc-line">
+        <span class="short-desc">🔹 остановить</span>
+        <button class="info-btn" onclick='showCommandInfo({command:"!buildspam stop", access:"R4", fullDesc:"Останавливает спам строительством.", examples:"!buildspam stop"})'>⚠️ Подробнее</button>
+    </div>
+</li>
+<li>
+    <div class="command-line">
+        <span class="command">!setgather on/off</span>
+        <button class="copy-btn" onclick="copyToClipboard(this.previousElementSibling)">⧉ Копировать</button>
+    </div>
+    <div class="desc-line">
+        <span class="short-desc">🔹 автосбор</span>
+        <button class="info-btn" onclick='showCommandInfo({command:"!setgather on/off", access:"R4", fullDesc:"Включает или выключает автоматический сбор ресурсов.", examples:"!setgather on<br>!setgather off"})'>⚠️ Подробнее</button>
+    </div>
+</li>
+<li>
+    <div class="command-line">
+        <span class="command">!snowbeast</span>
+        <button class="copy-btn" onclick="copyToClipboard(this.previousElementSibling)">⧉ Копировать</button>
+    </div>
+    <div class="desc-line">
+        <span class="short-desc">🔹 вьюжник</span>
+        <button class="info-btn" onclick='showCommandInfo({command:"!snowbeast", access:"R4", fullDesc:"Активирует навык вьюжника (буст производства ресурсов).", examples:"!snowbeast"})'>⚠️ Подробнее</button>
+    </div>
+</li>
+<li>
+    <div class="command-line">
+        <span class="command">!gryphon</span>
+        <button class="copy-btn" onclick="copyToClipboard(this.previousElementSibling)">⧉ Копировать</button>
+    </div>
+    <div class="desc-line">
+        <span class="short-desc">🔹 грифон</span>
+        <button class="info-btn" onclick='showCommandInfo({command:"!gryphon", access:"R4", fullDesc:"Активирует навык грифона (ускорение маршей).", examples:"!gryphon"})'>⚠️ Подробнее</button>
+    </div>
+</li>
 </ul>
 
+<div class="bot-links">
+    <a href="https://t.me/+gO15epiUvJllN2Nk" target="_blank">Ресурсы / Самоцветы / Подбор аккаунтов</a>
+    <a href="https://t.me/+zQKosWaPpThiY2Ey" target="_blank">Подключить бота</a>
+</div>
 
 </body>
 </html>
